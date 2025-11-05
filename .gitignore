@@ -1,0 +1,18 @@
+# Track nothing by default
+/*
+
+# Allow these:
+!.gitignore
+!README.md
+!LICENSE
+!docker-compose.yml
+!.env
+
+# Allow the theme folder (everything inside)
+!theme/
+!theme/**
+# Optional: ignore build junk inside theme
+theme/node_modules/
+theme/dist/
+theme/.DS_Store
+
