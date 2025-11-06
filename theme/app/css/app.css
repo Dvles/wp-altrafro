@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Google Fonts (Metrophobic + Ubuntu Mono) */
+@import url('https://fonts.googleapis.com/css2?family=Metrophobic&family=Ubuntu+Mono:wght@400;700&display=swap');
+
+/* 12-col helper: Tailwind already has grid-cols-12, but we add a named utility */
+@layer utilities {
+  .grid-12 { @apply grid grid-cols-12 gap-4 md:gap-6; }
+  .wrapper { @apply container max-w-page; } /* centered page wrapper */
+}

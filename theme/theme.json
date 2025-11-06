@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "settings": {
+    "typography": {
+      "fontFamilies": [
+        { "name": "Metrophobic", "slug": "metro", "fontFamily": "Metrophobic, system-ui, sans-serif" },
+        { "name": "Ubuntu Mono", "slug": "mono", "fontFamily": "Ubuntu Mono, ui-monospace, monospace" }
+      ],
+      "fluid": true
+    },
+    "color": {
+      "palette": [
+        { "name": "Ink", "slug": "ink", "color": "#000000" },
+        { "name": "Paper", "slug": "paper", "color": "#ffffff" },
+        { "name": "Neon", "slug": "neon", "color": "#77ff55" }
+      ]
+    },
+    "layout": {
+      "contentSize": "1100px",
+      "wideSize": "1400px"
+    }
+  },
+  "styles": {
+    "typography": { "fontFamily": "var(--wp--preset--font-family--metro)" }
+  }
+}
