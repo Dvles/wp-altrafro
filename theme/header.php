@@ -10,15 +10,20 @@
   <div class="wrapper-nopad">
     <div class="page-grid">
       <!-- Logo: always visible -->
-      <a href="<?= esc_url(home_url('/')); ?>" class="col-span-1 flex border-l border-b border-r border-black bg-white/90 backdrop-blur">
+      <a href="<?= esc_url(home_url('/')); ?>" class="h-16 md:h-auto col-span-2 lg:col-span-1 flex border-l border-b border-r border-black bg-white/90 backdrop-blur">
         <span class="block w-full bg-black"></span>
       </a>
       
-      <!-- Empty space: 8 columns with bottom border -->
+      <!-- Search overlay: 8 columns -->
       <?php get_template_part('template-parts/search-overlay'); ?>
       
-      <!-- Nav: hide on scroll down, show on scroll up -->
-      <nav id="main-nav" class="hidden md:block col-span-3 transition-all duration-500 ease-in-out bg-white/90 backdrop-blur relative z-50">
+      <!-- Mobile menu trigger (hidden on desktop, visible on mobile) -->
+      <button id="mobile-menu-trigger" class="h-16 lg:h-auto lg:hidden col-span-2 flex items-center justify-center border-b border-r  border-l border-black bg-white/90 backdrop-blur">
+        <img src="<?php echo get_template_directory_uri(); ?>/template-parts/icons/hamburger.svg" alt="Menu" class="w-6 h-6">
+      </button>
+      
+      <!-- Desktop Nav (visible on desktop, hidden on mobile) -->
+      <nav id="main-nav" class="hidden lg:block col-span-3 transition-all duration-500 ease-in-out bg-white/90 backdrop-blur relative z-50">
         <div class="grid grid-cols-3 grid-rows-2">
           <?php
           $loc   = get_nav_menu_locations();
@@ -34,7 +39,6 @@
             }
             
             if ($item) {
-              // Check if this is a search trigger
               $isSearch = (stripos($item->url, '#search') !== false) || 
                           (stripos($item->title, 'search') !== false) || 
                           (stripos($item->title, 'rechercher') !== false);
