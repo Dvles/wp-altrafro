@@ -41,6 +41,9 @@
   .menu-row  { @apply grid grid-cols-3 divide-x divide-black/40; }
   .menu-row + .menu-row { @apply border-t border-black/40; }
   .menu-cell { @apply h-12 px-4 flex items-center justify-center text-xs uppercase tracking-wide hover:bg-black hover:text-white transition; }
+  #main-nav {
+    transition: transform 0.3s ease-in-out, opacity 0.1s ease-in-out;
+  }
 }
 
 @layer base {
