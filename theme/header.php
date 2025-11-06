@@ -15,10 +15,10 @@
       </a>
       
       <!-- Empty space: 8 columns with bottom border -->
-      <div class="col-span-8 border-b border-white bg-white/90 "></div>
+      <?php get_template_part('template-parts/search-overlay'); ?>
       
       <!-- Nav: hide on scroll down, show on scroll up -->
-      <nav id="main-nav" class="hidden md:block col-span-3 transition-transform duration-300 bg-white/90 backdrop-blur">
+      <nav id="main-nav" class="hidden md:block col-span-3 transition-all duration-500 ease-in-out bg-white/90 backdrop-blur relative z-50">
         <div class="grid grid-cols-3 grid-rows-2">
           <?php
           $loc   = get_nav_menu_locations();
@@ -34,7 +34,14 @@
             }
             
             if ($item) {
-              echo '<a class="flex items-center justify-center py-4 text-[10px] uppercase tracking-wide hover:bg-black hover:text-white transition '.$borderClass.'" href="'.esc_url($item->url).'">'.esc_html($item->title).'</a>';
+              // Check if this is a search trigger
+              $isSearch = (stripos($item->url, '#search') !== false) || 
+                          (stripos($item->title, 'search') !== false) || 
+                          (stripos($item->title, 'rechercher') !== false);
+              
+              $extraClass = $isSearch ? ' search-trigger-item' : '';
+              
+              echo '<a class="flex items-center justify-center py-4 text-[10px] uppercase tracking-wide hover:bg-black hover:text-white transition '.$borderClass.$extraClass.'" href="'.esc_url($item->url).'">'.esc_html($item->title).'</a>';
             } else {
               echo '<span class="py-4 '.$borderClass.'"></span>';
             }

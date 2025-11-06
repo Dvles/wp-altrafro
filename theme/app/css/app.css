@@ -44,6 +44,10 @@
   #main-nav {
     transition: transform 0.3s ease-in-out, opacity 0.1s ease-in-out;
   }
+  /* Search overlay styles */
+  #search-backdrop.active {
+    @apply opacity-80 pointer-events-auto;
+  }
 }
 
 @layer base {
