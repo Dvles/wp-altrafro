@@ -2,11 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Google Fonts (Metrophobic + Ubuntu Mono) */
 @import url('https://fonts.googleapis.com/css2?family=Metrophobic&family=Ubuntu+Mono:wght@400;700&display=swap');
 
-/* 12-col helper: Tailwind already has grid-cols-12, but we add a named utility */
-@layer utilities {
-  .grid-12 { @apply grid grid-cols-12 gap-4 md:gap-6; }
-  .wrapper { @apply container max-w-page; } /* centered page wrapper */
+:root {
+  --page: 1728px;
+  --gutter: 0px;  
 }
+
+@layer utilities {
+  .wrapper       { @apply container max-w-page; }
+  .wrapper-nopad { @apply container max-w-page px-0; }
+  
+  .page-grid {
+    @apply grid grid-cols-12;
+    gap: 0; 
+  }
+  
+  .debug-cols::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    margin-inline: auto;
+    width: min(100vw, var(--page));
+    pointer-events: none;
+    z-index: 9999;
+    background-image: linear-gradient(
+      to right,
+      rgba(0,0,0,.08) 0 1px,
+      transparent 1px calc(100% / 12)
+    );
+    background-size: calc(100% / 12) 100%;
+    background-position: left top;
+  }
+}
+
+@layer components {
+  .menu-grid { @apply border border-black/40; }
+  .menu-row  { @apply grid grid-cols-3 divide-x divide-black/40; }
+  .menu-row + .menu-row { @apply border-t border-black/40; }
+  .menu-cell { @apply h-12 px-4 flex items-center justify-center text-xs uppercase tracking-wide hover:bg-black hover:text-white transition; }
+}
+
+@layer base {
+  nav, ul, header, .wrapper, .wrapper-nopad { 
+    margin: 0; 
+    padding: 0; 
+  }
+}
+
+/* TEMP debug outlines */
+/* * { outline: 1px solid rgba(255,0,0,.12); } */

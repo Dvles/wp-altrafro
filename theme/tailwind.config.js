@@ -4,22 +4,20 @@ module.exports = {
     container: {
       center: true,
       padding: {
-        DEFAULT: "1rem",
-        md: "1.5rem",
-        lg: "2rem"
+        DEFAULT: "0rem",
+        sm: "0rem",
+        md: "0rem",
+        lg: "0rem",
+        xl: "0rem"
       }
     },
     extend: {
-      // Set your max working width so grid stays centered on super-wide screens
-      screens: {
-        '2xl': '1728px'      // feel free to bump to 1728/1800 if you prefer
-      },
-      maxWidth: {
-        'page': '1728px'     // used by wrapper
+      maxWidth: { 
+        page: "1728px" 
       },
       fontFamily: {
         metro: ['Metrophobic', 'system-ui', 'sans-serif'],
-        mono: ['Ubuntu Mono', 'ui-monospace', 'SFMono-Regular', 'monospace']
+        mono: ['Ubuntu Mono', 'ui-monospace', 'monospace']
       },
       colors: {
         ink: '#000000',
@@ -29,5 +27,5 @@ module.exports = {
       }
     }
   },
-  plugins: [require('@tailwindcss/typography')]
+  plugins: [require('@tailwindcss/typography')],
 };

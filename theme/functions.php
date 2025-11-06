@@ -12,7 +12,18 @@ add_action('after_setup_theme', function () {
 
 // enqueue compiled assets
 add_action('wp_enqueue_scripts', function () {
-  wp_enqueue_style('altr-app', get_theme_file_uri('dist/assets/app.css'), [], null);
-  wp_enqueue_script('altr-main', get_theme_file_uri('dist/assets/main.js'), [], null, true);
-});
+  // Relative paths inside the theme
+  $css = 'dist/assets/app.css';
+  $js  = 'dist/assets/main.js';
 
+  // Cache-busting using filemtime (works with child themes too)
+  $css_path = get_theme_file_path($css);
+  $js_path  = get_theme_file_path($js);
+
+  $css_ver = file_exists($css_path) ? filemtime($css_path) : null;
+  $js_ver  = file_exists($js_path)  ? filemtime($js_path)  : null;
+
+  // Enqueue
+  wp_enqueue_style('altr-app', get_theme_file_uri($css), [], $css_ver);
+  wp_enqueue_script('altr-main', get_theme_file_uri($js), [], $js_ver, true);
+}, 20);
