@@ -1,6 +1,6 @@
 </main>
 
-<footer class="mt-24 bg-black text-white border-t border-black">
+<footer class="fixed bottom-0 left-0 right-0 bg-black text-white border-t border-black z-30">
   <div class="wrapper-nopad">
     <div class="page-grid">
       <!-- Static footer items -->
