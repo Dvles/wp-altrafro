@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Template part for displaying card default with feaured image in background
+ * Template part for displaying card default with featured image in background
  * 
  * @package altr
  */
@@ -18,39 +17,39 @@
       </div>
     <?php endif; ?>
 
-    <!-- Content box with border -->
-    <div class="relative z-10 border border-black bg-white hover:bg-hypergreen px-4 py-10">
-      <!-- CAT // TODO replace by button component -->
-      <?php
-      $categories = get_the_category();
-      if ($categories) : ?>
-        <a
-          href="<?php echo esc_url(get_category_link($categories[0]->term_id)); ?>"
-          class="absolute left-[-1px] top-0 -translate-y-full
-                 bg-black text-white px-4 py-2 text-xs uppercase tracking-wide
-                 hover:bg-gray-800 transition">
-          <?php echo esc_html(strtoupper($categories[0]->name)); ?>
-        </a>
-      <?php endif; ?>
+    <!-- CATEGORY -->
+    <?php
+    $categories = get_the_category();
+    if ($categories) : ?>
+      <a
+        href="<?php echo esc_url(get_category_link($categories[0]->term_id)); ?>"
+        class="absolute left-[-1px] top-0 -translate-y-full
+               bg-black text-white px-4 py-2 text-xs uppercase tracking-wide
+               hover:bg-gray-800 transition z-20"
+      >
+        <?php echo esc_html(strtoupper($categories[0]->name)); ?>
+      </a>
+    <?php endif; ?>
 
-      <!-- Headline  -->
-      <h2 class="hero-headline mb-4">
-        <a href="<?php the_permalink(); ?>" class="hover:opacity-70 transition">
-          /<?php the_title(); ?>/
-        </a>
-      </h2>
+    <!-- FEATURED CARD -->
+    <a 
+      href="<?php the_permalink(); ?>" 
+      class="relative z-10 block border border-black bg-white hover:bg-hypergreen px-4 py-10 transition"
+    >
+      <div>
+        <h2 class="hero-headline mb-4">/<?php the_title(); ?>/</h2>
+        <p class="hero-description"><?php echo wp_trim_words(get_the_excerpt(), 20); ?></p>
+      </div>
 
-      <p class="hero-description">
-        <?php echo wp_trim_words(get_the_excerpt(), 20); ?>
-      </p>
-
-      <!-- READ button-->
-      <?php get_template_part('template-parts/components/button', null, [
+      <!-- READ BUTTON -->
+      <?php 
+      get_template_part('template-parts/components/button', null, [
         'url' => get_permalink(),
         'label' => 'Read',
         'position'=> 'bottom_right',
         'size'=> 'medium'
-      ]); ?>
-    </div>
+      ]); 
+      ?>
+    </a>
   </div>
 </article>
