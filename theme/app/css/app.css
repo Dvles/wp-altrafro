@@ -1,8 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Metrophobic&family=Ubuntu+Mono:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Metrophobic&family=Ubuntu+Mono:wght@400;700&display=swap');
 
 :root {
   --page: 1728px;
@@ -52,6 +53,18 @@
   #menu-backdrop.active {
     @apply opacity-80 pointer-events-auto;
   }
+
+  /* Mobile menu title background (below borders) */
+/* Mobile menu title background (below borders) */
+.menu-title-bg {
+  @apply relative;
+}
+
+.menu-title-bg::before {
+  content: "";
+  @apply absolute bg-hypergreen -z-10;
+  inset: 0 0 0.75px 0 ;
+}
 }
 
 @layer base {

@@ -2,7 +2,7 @@
 <div id="search-backdrop" class="fixed inset-0 bg-black opacity-0 transition-opacity duration-300 pointer-events-none hidden" style="z-index: 35;"></div>
 
 <!-- Search Bar (initially hidden) -->
-<div id="search-bar" class="h-16   lg:h-auto col-span-8 border-b border-black bg-white/90 backdrop-blur hidden relative z-50">
+<div id="search-bar" class="h-16  lg:h-auto col-span-8 border-b border-black bg-white/90 backdrop-blur hidden relative z-50">
   <div class="flex items-center justify-center h-full px-8 relative">
     <form role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>" class="flex-1 max-w-2xl">
       <input 
