@@ -54,16 +54,24 @@
     @apply opacity-80 pointer-events-auto;
   }
 
-  /* Mobile menu title background (below borders) */
-/* Mobile menu title background (below borders) */
-.menu-title-bg {
-  @apply relative;
-}
 
-.menu-title-bg::before {
-  content: "";
-  @apply absolute bg-hypergreen -z-10;
-  inset: 0 0 0.75px 0 ;
+/* Mobile menu title background (below borders) */
+  .menu-title-bg {
+    @apply relative;
+  }
+
+  .menu-title-bg::before {
+    content: "";
+    @apply absolute bg-hypergreen -z-10;
+    inset: 0 0 0.75px 0 ;
+  }
+
+  /* Disable the pseudo-element at lg and up */
+@screen lg {
+  .menu-title-bg::before {
+    content: none;      /* removes the pseudo-element */
+    display: none;      /* extra safety */
+  }
 }
 }
 

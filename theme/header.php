@@ -31,7 +31,9 @@
         <?php get_template_part('template-parts/mobile-menu'); ?>
         
         <!-- Desktop Nav -->
-        <nav id="main-nav" class="hidden lg:block col-span-3 transition-all duration-500 ease-in-out bg-white/90 backdrop-blur relative z-50">
+        <nav id="main-nav"
+     class="hidden lg:block lg:col-span-3 transition-all duration-500 ease-in-out bg-white/90 backdrop-blur relative z-50">
+
           <div class="grid grid-cols-3 grid-rows-2">
             <?php
             $loc   = get_nav_menu_locations();
