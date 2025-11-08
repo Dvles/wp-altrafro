@@ -80,6 +80,8 @@
   .card-excerpt {
     @apply text-sm md:text-base leading-relaxed;
   }
+
+
   
   /* Meta Data */
   .meta-tags {
