@@ -7,7 +7,7 @@
   <?php wp_head(); ?>
 </head>
 
-<body <?php body_class('bg-paper text-ink font-metro debug-cols'); ?>>
+<body <?php body_class('bg-paper text-ink font-metro debug-cols min-h-screen flex flex-col'); ?>>
   <header class="fixed left-0 right-0 z-40">
     <div class="wrapper-nopad">
       <div class="page-grid">
@@ -62,4 +62,4 @@
       </div>
     </div>
   </header>
-  <main class="wrapper py-8 md:py-12">
+  <main class="wrapper py-8 md:py-12 flex-grow">
