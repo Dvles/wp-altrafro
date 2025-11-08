@@ -67,12 +67,12 @@
   }
 
   /* Disable the pseudo-element at lg and up */
-@screen lg {
-  .menu-title-bg::before {
-    content: none;      /* removes the pseudo-element */
-    display: none;      /* extra safety */
+  @screen lg {
+    .menu-title-bg::before {
+      content: none;      
+      display: none;      
+    }
   }
-}
 }
 
 @layer base {
