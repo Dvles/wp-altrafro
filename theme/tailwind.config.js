@@ -12,6 +12,9 @@ module.exports = {
       }
     },
     extend: {
+      lineHeight: {
+        tightest: '0.4', 
+      },
       zIndex: {
         '60': '60',
         '70': '70',

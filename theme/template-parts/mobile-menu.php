@@ -13,7 +13,7 @@
                 </a>
                 <!-- Menu Title -->
                 <div class="col-span-8 px-4 h-full flex items-center justify-center menu-title-bg">
-                    <h2 class="text-2xl text-center uppercase font-metro">Menu</h2>
+                    <h2 class="text-2xl text-center uppercase font-metro font-semibold">Menu</h2>
                 </div>
                 <!-- Close Button -->
                 <div class=" col-span-2 h-16 flex items-center justify-center border-l border-black">

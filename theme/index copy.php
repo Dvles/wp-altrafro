@@ -1,9 +1,5 @@
 <?php get_header(); ?>
 
-
-
-
-
 <section class="grid-12">
   <h2 class="hero-headline global-padding pt-44 ">/SAMANTHA SOKO/</h2>
   <p class="hero-description global-padding">CBD⁴⁴; Quand l'émotion prend une forme universelle</p>

@@ -45,6 +45,55 @@
   #main-nav {
     transition: transform 0.3s ease-in-out, opacity 0.1s ease-in-out;
   }
+  /* Spacings */
+  .global-padding {
+    @apply pl-4;
+  }
+
+  /* Hero Typography */
+  .hero-headline {
+    @apply text-4xl md:text-5xl lg:text-6xl uppercase font-metro leading-tight font-bold;
+  }
+  
+  .hero-description {
+    @apply text-2xl md:text-3xl font-metro leading-tight;
+  }
+
+  /* Header typography */
+  .page-title{
+    @apply text-2xl md:text-3xl uppercase font-metro font-bold;
+  }
+
+  .filter-menu {
+    @apply flex flex-row gap-2;
+  }
+  .filter-menu-items {
+    @apply text-base md:text-base uppercase font-metro leading-tight font-light flex items-start hover:bg-hypergreen;
+  }
+
+  
+  /* Blog Card Typography */
+  .card-title {
+    @apply text-base md:text-xl uppercase font-metro leading-tight font-light flex items-start;
+  }
+  
+  .card-excerpt {
+    @apply text-sm md:text-base leading-relaxed;
+  }
+  
+  /* Meta Data */
+  .meta-tags {
+     @apply flex items-center justify-start gap-4;
+  }
+  .meta-cat {
+    @apply text-xs lg:text-sm uppercase tracking-wide font-mono hover:underline font-light ;
+  }
+
+  .meta-date {
+  @apply text-xs lg:text-sm tracking-wide font-mono font-light ;
+  }
+  
+
   /* Backdrops */
   #search-backdrop.active {
     @apply opacity-80 pointer-events-auto;
