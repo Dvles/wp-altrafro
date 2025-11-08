@@ -1,8 +1,9 @@
 <?php get_header(); ?>
 <h2 class=" pt-44 "></h2>
 
+<?php get_template_part('template-parts/cards/card-default'); ?>
+<h2 class=" pt-44 "></h2>
 <?php get_template_part('template-parts/cards/card-featured'); ?>
-
 
 
 

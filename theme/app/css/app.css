@@ -47,7 +47,7 @@
   }
   /* Spacings */
   .global-padding {
-    @apply pl-4;
+    @apply pl-4 pr-4 py-4;
   }
 
   /* Hero Typography */
@@ -85,7 +85,7 @@
   
   /* Meta Data */
   .meta-tags {
-     @apply flex items-center justify-start gap-4;
+     @apply flex items-center justify-start gap-4 ;
   }
   .meta-cat {
     @apply text-xs lg:text-sm uppercase tracking-wide font-mono hover:underline font-light ;

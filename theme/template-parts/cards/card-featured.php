@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for displaying a standard post card
+ * Template part for displaying card default with feaured image in background
  * 
  * @package altr
  */
@@ -33,7 +33,7 @@
         </a>
       <?php endif; ?>
 
-      <!-- Headline + description inside bordered box -->
+      <!-- Headline  -->
       <h2 class="hero-headline mb-4">
         <a href="<?php the_permalink();?>" class="hover:opacity-70 transition">
           /<?php the_title(); ?>/
