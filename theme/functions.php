@@ -10,6 +10,7 @@ add_action('after_setup_theme', function () {
   
   register_nav_menus([
     'primary' => __('Primary Menu', 'altr'),
+    'mobile'  => __('Mobile Menu', 'altr'),
   ]);
 });
 
@@ -36,6 +37,11 @@ add_action('wp_enqueue_scripts', function () {
   $search_js_path = get_theme_file_path('app/js/search-toggle.js');
   $search_js_ver = file_exists($search_js_path) ? filemtime($search_js_path) : '1.0.0';
   wp_enqueue_script('altr-search-toggle', get_theme_file_uri('app/js/search-toggle.js'), [], $search_js_ver, true);
+  
+  // Mobile menu JS (ADD THIS!)
+  $mobile_js_path = get_theme_file_path('app/js/mobile-menu.js');
+  $mobile_js_ver = file_exists($mobile_js_path) ? filemtime($mobile_js_path) : '1.0.0';
+  wp_enqueue_script('altr-mobile-menu', get_theme_file_uri('app/js/mobile-menu.js'), [], $mobile_js_ver, true);
 }, 20);
 
 /**

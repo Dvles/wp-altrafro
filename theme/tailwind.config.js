@@ -12,6 +12,10 @@ module.exports = {
       }
     },
     extend: {
+      zIndex: {
+        '60': '60',
+        '70': '70',
+      },
       maxWidth: { 
         page: "1728px" 
       },
