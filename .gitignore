@@ -14,5 +14,6 @@
 # Optional: ignore build junk inside theme
 theme/node_modules/
 theme/dist/
+theme/template-parts/archives
 theme/.DS_Store
 

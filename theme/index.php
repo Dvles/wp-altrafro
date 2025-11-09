@@ -14,58 +14,62 @@
 <!-- PAGE HEADER -->
 <?php
 get_template_part('template-parts/layouts/page-header', null, [
-  'heading' => 'Magazine'
+  'heading' => 'Magazine1'
 ]);
 ?>
 
 
-<h2 class=" pt-44 "></h2>
+<section class="wrapper py-12 pt-44">
+  <div class="page-grid gap-y-28   ">
 
-<?php get_template_part('template-parts/cards/card-default'); ?>
-<h2 class=" pt-44 "></h2>
-<?php get_template_part('template-parts/cards/card-featured'); ?>
+    <!-- LEFT VERTICAL STRIP = col-span-1 -->
+    <aside class="hidden lg:flex col-span-1 lg:row-span-3 items-stretch">
+      <div class="w-full flex items-end">
+        <span class="uppercase tracking-wide">
+          ART&gt;ART&gt;ART&gt;
+        </span>
+      </div>
+    </aside>
 
+    <?php
+    $mag_query = new WP_Query([
+      'post_type'      => 'post',
+      'posts_per_page' => -1,
+      'orderby'        => 'date',
+      'order'          => 'DESC',
+    ]);
 
+    if ( $mag_query->have_posts() ) :
+      $i = 0;
+      while ( $mag_query->have_posts() ) :
+        $mag_query->the_post();
+        $i++;
+        ?>
 
-<section class="grid-12">
-  <h2 class="hero-headline global-padding pt-44 ">/SAMANTHA SOKO/</h2>
-  <p class="hero-description global-padding">CBD⁴⁴; Quand l'émotion prend une forme universelle</p>
-  <div class="page-title global-padding">Magazine</div>
-  <div class="filter-menu global-padding">
-    <a href="#" class="filter-menu-items">.ART</a>
-    <a href="#" class="filter-menu-items">.ART</a>
-    <a href="#" class="filter-menu-items">.ART</a>
-    <a href="#" class="filter-menu-items">.ART</a>
+        <!-- CARD = 3 columns on desktop -->
+        <article class="col-span-12 md:col-span-6 lg:col-span-3 ">
+          <?php get_template_part( 'template-parts/cards/card', 'default' ); ?>
+        </article>
+
+        <?php
+        // Insert a 1-col gap after card 1 and 2, 4 and 5, 7 and 8, etc.
+        if ( $i % 3 !== 0 ) {
+          echo '<div class="hidden lg:block col-span-1"></div>';
+        }
+
+      endwhile;
+      wp_reset_postdata();
+    else :
+      echo '<p class="col-span-12">No articles yet.</p>';
+    endif;
+    ?>
+
   </div>
-
-
-  <h2 class="card-title global-padding">CBD⁴⁴; Quand l'émotion prend une forme universelle</h2>
-  <div class="">
-    <a href="" class="meta-date global-padding">8 hours ago</a>
-  </div>
-  <div class="meta-tags global-padding">
-    <a href="/category/creative-direction" class="meta-cat">#CREATIVEDIRECTION</a>
-    <a href="/category/mixed-media" class="meta-cat">#MIXEDMEDIA</a>
-  </div>
-
-  <?php if (have_posts()): while (have_posts()): the_post(); ?>
-      <article class="col-span-12 md:col-span-6 lg:col-span-4 border border-black/15">
-        <a href="<?php the_permalink(); ?>" class="block">
-          <div class="aspect-[3/4] bg-black/5 flex items-center justify-center">
-            <?php if (has_post_thumbnail()) {
-              the_post_thumbnail('large', ['class' => 'w-full h-full object-cover']);
-            } ?>
-          </div>
-          <div class="p-4 border-t border-black/10">
-            <h2 class="text-base md:text-lg leading-tight"><?php the_title(); ?></h2>
-            <div class="mt-2 text-xs text-black/60"><?php echo get_the_date(); ?></div>
-          </div>
-        </a>
-      </article>
-    <?php endwhile;
-  else: ?>
-    <p class="col-span-12">No posts yet.</p>
-  <?php endif; ?>
 </section>
+
+
+
+
+
 
 <?php get_footer(); ?>

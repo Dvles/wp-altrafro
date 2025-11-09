@@ -16,7 +16,6 @@
   
   .page-grid {
     @apply grid grid-cols-12;
-    gap: 0; 
   }
 
 
