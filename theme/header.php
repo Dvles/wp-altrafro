@@ -62,4 +62,4 @@
       </div>
     </div>
   </header>
- <main class="wrapper py-8 md:py-12 pb-24">
+ <main class="wrapper">

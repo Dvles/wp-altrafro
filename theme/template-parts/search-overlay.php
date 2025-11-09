@@ -26,4 +26,4 @@
 </div>
 
 <!-- Empty space (shown when search is closed) - NO BORDER -->
-<div id="search-placeholder" class="h-16 lg:h-auto col-span-8 bg-white/90 backdrop-blur"></div>
+<div id="search-placeholder" class="h-16 lg:h-auto col-span-8 bg-transparent "></div>

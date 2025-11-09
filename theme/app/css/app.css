@@ -18,6 +18,8 @@
     @apply grid grid-cols-12;
     gap: 0; 
   }
+
+
   
   .debug-cols::before {
     content: "";
