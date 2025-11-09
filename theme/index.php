@@ -1,12 +1,33 @@
 <?php get_header(); ?>
+
+<section class="h-screen-80 grid-12 bg-slate-500 z-30">
+  <p></p>
+</section>
+
+<!-- READ BUTTON -->
+<?php 
+get_template_part('template-parts/layouts/page-header', null, [
+  'heading' => 'Magazine'
+]); 
+?>
+
+<section class="min-h-screen-95px page-grid ">
+  <div class="col-start-2 global-padding">
+    <h2 class="page-title">Magazine</h2>
+    <div class="filter-menu ">
+      <a href="#" class="filter-menu-items">.ART</a>
+      <a href="#" class="filter-menu-items">.ART</a>
+      <a href="#" class="filter-menu-items">.ART</a>
+      <a href="#" class="filter-menu-items">.ART</a>
+    </div>
+  </div>
+</section>
+
 <h2 class=" pt-44 "></h2>
 
 <?php get_template_part('template-parts/cards/card-default'); ?>
 <h2 class=" pt-44 "></h2>
 <?php get_template_part('template-parts/cards/card-featured'); ?>
-
-
-
 
 
 
