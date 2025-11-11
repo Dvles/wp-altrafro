@@ -3,6 +3,13 @@ module.exports = {
   theme: {
     container: {
       center: true,
+      screens: {
+        sm: "100%",
+        md: "100%",
+        lg: "100%",
+        xl: "100%",
+        "2xl": "1728px"
+      },
       padding: {
         DEFAULT: "0rem",
         sm: "0rem",
@@ -12,7 +19,7 @@ module.exports = {
       }
     },
     extend: {
-            height: {
+      height: {
         'screen-9': '9.5vh',
         'screen-80': '83vh',
         'screen-95px': '95px',
