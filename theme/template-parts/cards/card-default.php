@@ -37,7 +37,7 @@
     href="<?php the_permalink(); ?>"
     class="block border-b border-black hover:bg-hypergreen transition flex-1 min-h-32 ">
     <h2 class="card-title global-padding">
-      <?php the_title(); ?>
+      <?php echo altr_get_display_title(); ?>
     </h2>
   </a>
 

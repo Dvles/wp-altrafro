@@ -4,7 +4,6 @@
  *
  * @package altr
  */
-
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -67,4 +66,35 @@ function altr_posted_categories() {
         }
         echo '</span>';
     }
+}
+
+/**
+ * Get the complete formatted title with series number in superscript
+ *
+ * @param int $post_id Optional post ID
+ * @return string Complete formatted title with HTML
+ */
+function altr_get_display_title($post_id = null) {
+    if (!$post_id) {
+        $post_id = get_the_ID();
+    }
+    
+    $title = get_the_title($post_id);
+    $artist = altr_get_artist($post_id);
+    $series_number = altr_get_series_number($post_id);
+    
+    // Remove any existing superscript numbers from title
+    $title = preg_replace('/CBD[⁴⁴⁰¹²³⁴⁵⁶⁷⁸⁹]+/', 'CBD', $title);
+    
+    // Replace /artist/ placeholder with actual artist name
+    if ($artist && strpos($title, '/artist/') !== false) {
+        $title = str_replace('/artist/', '/' . strtoupper($artist) . '/', $title);
+    }
+    
+    // Add series number in superscript for CBD posts
+    if ($series_number && strpos($title, 'CBD') !== false) {
+        $title = preg_replace('/CBD/', 'CBD<sup>' . $series_number . '</sup>', $title, 1);
+    }
+    
+    return $title;
 }

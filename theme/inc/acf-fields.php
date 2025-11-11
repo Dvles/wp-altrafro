@@ -4,7 +4,6 @@
  *
  * @package altr
  */
-
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -30,15 +29,38 @@ function altr_register_acf_fields() {
                 'instructions' => 'Enter the artist name for this post',
                 'required' => 0,
                 'default_value' => '',
-                'placeholder' => 'e.g., Kehinde Wiley',
+                'placeholder' => 'e.g., Odunsi Jr Fabrice-Prince',
                 'maxlength' => 100,
+            ],
+            [
+            'key' => 'field_series_number',
+            'label' => 'Series Number',
+            'name' => 'series_number',
+            'type' => 'number',
+            'instructions' => 'Episode number (auto-generated for CBD series)',
+            'required' => 0,
+            'default_value' => '',
+            'placeholder' => 'e.g., 44',
+            'min' => 1,
+            'max' => 999,
+            ],
+            [
+                'key' => 'field_subtitle',
+                'label' => 'Subtitle',
+                'name' => 'subtitle',
+                'type' => 'text',
+                'instructions' => 'Enter the subtitle (used for featured posts and displays)',
+                'required' => 0,
+                'default_value' => '',
+                'placeholder' => 'e.g., Quand l\'émotion prend une forme universelle',
+                'maxlength' => 150,
             ],
             [
                 'key' => 'field_series_description',
                 'label' => 'Series Description',
                 'name' => 'series_description',
                 'type' => 'text',
-                'instructions' => 'Enter the series description (e.g., Creative by design...)',
+                'instructions' => 'Enter the series description',
                 'required' => 0,
                 'default_value' => '',
                 'placeholder' => 'e.g., Creative by design ; exploration artistique approfondie',
@@ -65,11 +87,12 @@ add_action('acf/init', 'altr_register_acf_fields');
 
 /**
  * Helper function to get artist name
- *
- * @param int $post_id Optional post ID
- * @return string Artist name or empty string
  */
 function altr_get_artist($post_id = null) {
+    if (!function_exists('get_field')) {
+        return '';
+    }
+    
     if (!$post_id) {
         $post_id = get_the_ID();
     }
@@ -78,24 +101,36 @@ function altr_get_artist($post_id = null) {
 }
 
 /**
- * Display artist name
- *
- * @param int $post_id Optional post ID
+ * Helper function to get subtitle
  */
-function altr_the_artist($post_id = null) {
-    $artist = altr_get_artist($post_id);
-    if ($artist) {
-        echo esc_html($artist);
+function altr_get_subtitle($post_id = null) {
+    if (!function_exists('get_field')) {
+        return '';
     }
+    
+    if (!$post_id) {
+        $post_id = get_the_ID();
+    }
+    
+    $subtitle = get_field('subtitle', $post_id) ?: '';
+    
+    // Add "révélé en 30 questions" for 30? series
+    $title = get_the_title($post_id);
+    if ($subtitle && strpos($title, '30?') !== false) {
+        $subtitle .= ', révélé en 30 questions';
+    }
+    
+    return $subtitle;
 }
 
 /**
  * Helper function to get series description
- *
- * @param int $post_id Optional post ID
- * @return string Series description or empty string
  */
 function altr_get_series_description($post_id = null) {
+    if (!function_exists('get_field')) {
+        return '';
+    }
+    
     if (!$post_id) {
         $post_id = get_the_ID();
     }
@@ -104,13 +139,80 @@ function altr_get_series_description($post_id = null) {
 }
 
 /**
+ * Display artist name
+ */
+function altr_the_artist($post_id = null) {
+    $artist = altr_get_artist($post_id);
+    if ($artist) {
+        echo esc_html($artist);
+    }
+}
+
+
+
+/**
  * Display series description
- *
- * @param int $post_id Optional post ID
  */
 function altr_the_series_description($post_id = null) {
     $series_desc = altr_get_series_description($post_id);
     if ($series_desc) {
         echo esc_html($series_desc);
+    }
+}
+
+/**
+ * Get next CBD series number
+ * Finds the highest CBD number and returns next one
+ *
+ * @return int Next CBD number
+ */
+function altr_get_next_cbd_number() {
+    global $wpdb;
+    
+    // Query to find highest CBD number
+    $query = "
+        SELECT MAX(CAST(pm.meta_value AS UNSIGNED)) as max_number
+        FROM {$wpdb->postmeta} pm
+        INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+        WHERE pm.meta_key = 'series_number'
+        AND p.post_type = 'post'
+        AND p.post_status IN ('publish', 'draft', 'pending')
+        AND p.post_title LIKE 'CBD%'
+    ";
+    
+    $max_number = $wpdb->get_var($query);
+    
+    // Start at 44 if no CBD posts exist
+    return $max_number ? intval($max_number) + 1 : 44;
+}
+
+/**
+ * Get series number for a post
+ *
+ * @param int $post_id Optional post ID
+ * @return int|null Series number or null
+ */
+function altr_get_series_number($post_id = null) {
+    if (!function_exists('get_field')) {
+        return null;
+    }
+    
+    if (!$post_id) {
+        $post_id = get_the_ID();
+    }
+    
+    $number = get_field('series_number', $post_id);
+    return $number ? intval($number) : null;
+}
+
+/**
+ * Display series number in superscript
+ *
+ * @param int $post_id Optional post ID
+ */
+function altr_the_series_number($post_id = null) {
+    $number = altr_get_series_number($post_id);
+    if ($number) {
+        echo '<sup>' . esc_html($number) . '</sup>';
     }
 }

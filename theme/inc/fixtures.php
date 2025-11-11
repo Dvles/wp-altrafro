@@ -46,7 +46,7 @@ function altr_generate_fixtures($count = 10, $options = []) {
         'series_description' => 'Creative by design ; exploration artistique approfondie, transcendant les frontières créatives',
         'artists' => [
             'Odunsi Jr Fabrice-Prince', 'Kémi Telfort', 'Youssef Limoud', 
-            'Aminata Konaté', 'Geotheory', 'Fatou Diagne',
+            'Aminata Konaté', 'Geotheory', 'Fatou Diagne', 'Vanyfox', 'Dj Supa Dupa',
             'Reinel Bakole', 'Aïcha Touré', 'Cheikh Mbaye',
         ],
         'subtitles' => [
@@ -75,21 +75,41 @@ function altr_generate_fixtures($count = 10, $options = []) {
     $thirtyq_data = [
         'series_description' => '30 Questions qui explorent le passé, le présent et le futur des créateurs',
         'artists' => [
-            'Irma Odunsi', 'Léa Kouassi', 'Serge Baboua',
-            'Mariam Diallo', 'Hannah Habimana', 'Sophie Mensah',
-            'Jacques Nkrumah', 'Amina Sall', 'Pierre Kamara',
+            'Irma Odunsi', 'Léa Kouassi', 'Serge Baboua', 'XMLK','Red Milk','YEWYEW','Melanie G.','OneDive',
+            'Mariam Diallo', 'Hannah Habimana', 'Sophie Mensah', 'Leila Nabil', 
+            'Jacques Nkrumah', 'Amina Sall', 'Pierre Kamara', 'Jessica Marshall', 'Lisa-Marie Kotunga',
         ],
         'subtitles' => [
-            'Une invitation à la réflexion',
-            'Regards croisés sur la création',
-            'Parcours d\'un créateur engagé',
-            'Entre inspiration et transpiration',
-            'Les chemins de la créativité',
-            'Réflexions sur le processus créatif',
-            'Du rêve à la réalité',
-            'L\'art de questionner',
-            'Introspection d\'un artiste',
-            'Vision et ambition créative',
+            'Des formes de Résistance Visuelle',
+            'La typographie en Exil',
+            'Le Bruit des Couleurs',
+            'Décolonisation de l’Esthétique',
+            'Entre Archive et Futurisme',
+            'Les Langages Cachés du Design',
+            'Afrographie : Tracer l’Invisible',
+            'Matières Sonores & Visions Plastiques',
+            'Les Codes Culturels et Contre-Design',
+            'Des lignes Indociles',
+            'Comment fragmenter pour Reconstruire',
+            'La Poétique du Chaos Visuel',
+            'Quand le Pixel Devient Politique',
+            'Les Designs Sans Permission',
+            'Les Identités Liquides',
+            'Des Héritages Augmentés',
+            'L\'Afrofuturisme Quotidien',
+            'Les Visions du Sud Global',
+            'L\'Instinct Graphique',
+            'Des Cartographies Sensibles',
+            'Graphique / Radical / Libre',
+            'Comment voir Autrement',
+            'La Ligne et le Cri',
+            'L\'Hypertexture',
+            'Le Soft Power, Hard Design',
+            'Le Rituel Visuel',
+            'The Noise as Language',
+            'Le Contour / Mémoire / Signal',
+            'Pixel Noir',
+            'Des Formes Indisciplinées',
         ],
         'content' => [
             'Dans cet entretien approfondi, l\'artiste partage son parcours unique et ses réflexions sur l\'évolution de sa pratique. À travers 30 questions, nous explorons les influences qui ont façonné sa vision artistique.',
@@ -147,11 +167,21 @@ function altr_generate_fixtures($count = 10, $options = []) {
         // Build title
         $artist = $data['artists'][array_rand($data['artists'])];
         $subtitle = $data['subtitles'][array_rand($data['subtitles'])];
-        
+
+        // Get next CBD number if CBD series
         if ($series_type === 'cbd') {
-            $title = sprintf('CBD⁴⁴ /%s /; %s', strtoupper($artist), $subtitle);
+            $series_number = altr_get_next_cbd_number();
+            $title = 'CBD /artist/; ' . $subtitle;
         } else {
-            $title = sprintf('30?Q /%s/ %s', $artist, $subtitle);
+            $series_number = null; // 30? doesn't have numbers
+            $title = '30? /artist/; ' . $subtitle;
+        }
+        
+ 
+        if ($series_type === 'cbd') {
+            $title = 'CBD⁴⁴ /artist/; ' . $subtitle; // Garde le sous-titre pour l'admin
+        } else {
+            $title = '30? /artist/; ' . $subtitle; // Garde le sous-titre pour l'admin
         }
         
         // Random date within range
@@ -177,6 +207,16 @@ function altr_generate_fixtures($count = 10, $options = []) {
         
         $post_id = wp_insert_post($post_data);
         
+        if (function_exists('update_field')) {
+            update_field('artist', $artist, $post_id);
+            update_field('subtitle', $subtitle, $post_id);
+            update_field('series_description', $data['series_description'], $post_id);
+            
+            // Add series number for CBD
+            if ($series_number) {
+                update_field('series_number', $series_number, $post_id);
+            }
+}
         if (!is_wp_error($post_id)) {
             $created_posts[] = $post_id;
             

@@ -46,10 +46,15 @@
     <a
       href="<?php the_permalink(); ?>"
       class="relative z-10 block border border-black bg-white hover:bg-hypergreen px-4 pb-10 pt-4  transition">
-      <div>
-        <h2 class="hero-headline mb-4">/<?php the_title(); ?>/</h2>
-        <p class="hero-description"><?php echo wp_trim_words(get_the_excerpt(), 20); ?></p>
+      <div class="featured-post">
+          <h2 class="hero-headline">
+              /<?php echo strtoupper(altr_get_artist()); ?>/
+          </h2>
+          <p class="hero-description">
+              <?php echo altr_get_subtitle(); ?>
+          </p>
       </div>
+
 
       <!-- READ BUTTON -->
       <?php
