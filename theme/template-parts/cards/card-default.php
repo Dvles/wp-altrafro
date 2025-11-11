@@ -5,6 +5,7 @@
  *
  * @package altr
  */
+
 ?>
 
 <article class="relative z-10 border border-black bg-white hover:bg-hypergreen h-full flex flex-col">
@@ -36,7 +37,7 @@
     href="<?php the_permalink(); ?>"
     class="block border-b border-black hover:bg-hypergreen transition flex-1 min-h-32 ">
     <h2 class="card-title global-padding">
-      /<?php the_title(); ?>/
+      <?php the_title(); ?>
     </h2>
   </a>
 
@@ -44,7 +45,7 @@
   <div class="flex-1 flex flex-row">
     <!-- Time -->
     <div class="meta-tags border-r border-black">
-      <span class="meta-date global-padding block py-2">8 hours ago</span>
+      <span class="meta-date global-padding block py-2">   <?php echo altr_time_ago(); ?></span>
     </div>
 
     <!-- Tags -->
