@@ -39,6 +39,7 @@
   }
 }
 
+
 @layer components {
   .menu-grid { @apply border border-black/40; }
   .menu-row  { @apply grid grid-cols-3 divide-x divide-black/40; }
@@ -142,6 +143,10 @@
   .post-title sup {
     font-size: 0.5em;
   }
+
+  .grid-cols-11 {
+    grid-template-columns: repeat(11, minmax(0, 1fr));
+}
 
 
 }
