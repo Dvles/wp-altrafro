@@ -51,7 +51,7 @@
                          endwhile;
                          wp_reset_postdata();
                      else :
-                         echo '<p class="col-span-12">No articles yet.</p>';
+                         echo '<p class="col-span-11">No articles yet.</p>';
                      endif;
                      ?>
                      
