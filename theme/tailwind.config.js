@@ -50,7 +50,11 @@ module.exports = {
         paper: '#ffffff',
         hypergreen: '#4DFF26',
         pinkbytes: '#ff00fa',
-      }
+      },
+      screens: {
+        'xs': '475px',      // Extra small devices
+        '2lg': '1226px',    // Extra large screens
+      },
     }
   },
   plugins: [require('@tailwindcss/typography')],

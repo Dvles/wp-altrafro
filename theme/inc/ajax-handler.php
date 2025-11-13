@@ -1,5 +1,4 @@
 <?php
-
 /**
  * AJAX handler for filtering posts by category
  */
@@ -31,13 +30,23 @@ function altr_filter_posts() {
             $query->the_post();
             $i++;
             ?>
-            <article class="col-span-12 md:col-span-6 lg:col-span-3">
+            <article class="col-span-12 md:col-span-6 lg:col-span-5 2lg:col-span-3">
                 <?php get_template_part('template-parts/cards/card', 'default'); ?>
             </article>
             <?php
-            // Insert a 1-col gap after card 1 and 2, 4 and 5, 7 and 8, etc.
-            if ($i % 3 !== 0) {
+            // Spacer logic for different breakpoints
+            $show_on_lg = ($i % 2 !== 0);  // After odd articles on lg (1, 3, 5...)
+            $show_on_2lg = ($i % 3 !== 0); // After 1st & 2nd of every 3 on 2lg
+            
+            if ($show_on_lg && $show_on_2lg) {
+                // Show on both lg and 2lg
                 echo '<div class="hidden lg:block col-span-1 spacer"></div>';
+            } elseif ($show_on_lg && !$show_on_2lg) {
+                // Show only on lg, hide on 2lg
+                echo '<div class="hidden lg:block 2lg:hidden col-span-1 spacer"></div>';
+            } elseif (!$show_on_lg && $show_on_2lg) {
+                // Hide on lg, show only on 2lg
+                echo '<div class="hidden lg:hidden 2lg:block col-span-1 spacer"></div>';
             }
         }
         wp_reset_postdata();
@@ -48,7 +57,7 @@ function altr_filter_posts() {
     // Get the buffered content
     $html = ob_get_clean();
     
-    // Send JSON response
+    // Send JSON response back to JavaScript
     wp_send_json_success(['html' => $html]);
 }
 
