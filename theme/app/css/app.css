@@ -53,6 +53,15 @@
     @apply pl-4 pr-4 py-4;
   }
 
+  .global-padding-mobile-cards {
+    @apply pl-4 pr-4 py-4;
+  }
+
+
+  .global-padding-mobile-tags {
+    @apply pl-3 pr-3 py-1;
+  }
+
   /* Hero Typography */
   .hero-headline {
     @apply text-4xl md:text-5xl lg:text-6xl uppercase font-metro leading-tight font-bold;
