@@ -3,8 +3,6 @@
  * AJAX handler for filtering posts by category
  */
 function altr_filter_posts() {
-
-        error_log('AJAX filter_posts called'); // Add this
     $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : 'all';
     
     $args = [
@@ -27,19 +25,20 @@ function altr_filter_posts() {
             $query->the_post();
             $i++;
             
-            $is_mobile_featured = ($i === 1);
+            // Check if post is marked as featured in ACF, otherwise feature the first post
+            $is_mobile_featured = altr_is_featured_blog() || ($i === 1);
             ?>
             
-            <!-- MOBILE: Featured card (first post only) -->
+            <!-- MOBILE: Featured card (marked as featured OR first post) -->
             <?php if ($is_mobile_featured) : ?>
-                <article class="col-span-8 col-start-3 lg:hidden">
+                <article class="col-span-10 col-start-3 lg:hidden">
                     <?php include(locate_template('template-parts/cards/card-default.php')); ?>
                 </article>
             <?php endif; ?>
             
-            <!-- MOBILE: Compact cards (all posts except first) -->
+            <!-- MOBILE: Compact cards (all other posts) -->
             <?php if (!$is_mobile_featured) : ?>
-                <article class="col-span-8 col-start-3 lg:hidden">
+                <article class="col-span-10 col-start-3 lg:hidden">
                     <?php include(locate_template('template-parts/cards/card-compact.php')); ?>
                 </article>
             <?php endif; ?>

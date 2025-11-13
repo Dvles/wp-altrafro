@@ -85,10 +85,13 @@
 
   
   /* Blog Card Typography */
+  .card-title-default {
+    @apply text-2xl lg:text-xl uppercase font-metro leading-tight font-light flex items-start;
+  }
   .card-title {
     @apply text-base md:text-xl uppercase font-metro leading-tight font-light flex items-start;
   }
-  
+
   .card-excerpt {
     @apply text-sm md:text-base leading-relaxed;
   }

@@ -36,20 +36,20 @@
                             $mag_query->the_post();
                             $i++;
                             
-                            // First post on mobile is default card, rest are compact
-                            $is_mobile_featured = ($i === 1);
+                            // Check if post is marked as featured in ACF, otherwise feature the first post
+                            $is_mobile_featured = altr_is_featured_blog() || ($i === 1);
                             ?>
                             
-                            <!-- MOBILE: Featured card (first post only) -->
+                            <!-- MOBILE: Featured card (marked as featured OR first post) -->
                             <?php if ($is_mobile_featured) : ?>
                                 <article class="col-span-10 col-start-3 lg:hidden">
                                     <?php get_template_part('template-parts/cards/card', 'default'); ?>
                                 </article>
                             <?php endif; ?>
                             
-                            <!-- MOBILE: Compact cards (all posts except first) -->
+                            <!-- MOBILE: Compact cards (all other posts) -->
                             <?php if (!$is_mobile_featured) : ?>
-                                <article class="col-span-10  col-start-3 lg:hidden">
+                                <article class="col-span-10 col-start-3 lg:hidden">
                                     <?php get_template_part('template-parts/cards/card', 'compact'); ?>
                                 </article>
                             <?php endif; ?>

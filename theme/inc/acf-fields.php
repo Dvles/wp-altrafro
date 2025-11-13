@@ -22,6 +22,18 @@ function altr_register_acf_fields() {
         'title' => 'Post Meta',
         'fields' => [
             [
+                'key' => 'field_is_featured_blog',
+                'label' => 'Featured in Blog',
+                'name' => 'is_featured_blog',
+                'type' => 'true_false',
+                'instructions' => 'Display this post as a featured (default) card on mobile blog view',
+                'required' => 0,
+                'default_value' => 0,
+                'ui' => 1, 
+                'ui_on_text' => 'Featured',
+                'ui_off_text' => 'Regular',
+            ],
+            [
                 'key' => 'field_artist',
                 'label' => 'Artist',
                 'name' => 'artist',
@@ -84,6 +96,24 @@ function altr_register_acf_fields() {
     ]);
 }
 add_action('acf/init', 'altr_register_acf_fields');
+
+
+/**
+ * Helper function to check if post is featured in blog
+ */
+function altr_is_featured_blog($post_id = null) {
+    if (!function_exists('get_field')) {
+        return false;
+    }
+    
+    if (!$post_id) {
+        $post_id = get_the_ID();
+    }
+    
+    return (bool) get_field('is_featured_blog', $post_id);
+}
+
+
 
 /**
  * Helper function to get artist name
