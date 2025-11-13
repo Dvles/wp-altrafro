@@ -18,21 +18,22 @@ $subheading = $args['subheading'] ?? 'subheading';
     <!-- Sentinel sits above the header to trigger fixing -->
     <div id="sticky-sentinel" class="h-px"></div>
     
-    <div id="pageHeader" class="bg-slate-300 min-h-screen-95px z-40 transition-all duration-300 global-padding">
+    <!-- Mobile: min-h-screen-63px with no vertical padding, Desktop: min-h-screen-95px with py-4 -->
+    <div id="pageHeader" class="bg-slate-300 min-h-screen-63px px-4 py-0 lg:min-h-screen-95px z-40 transition-all duration-300 lg:py-4 flex flex-col justify-center lg:justify-start">
       <h2 class="page-title"><?php echo esc_html($heading); ?></h2>
       <div class="filter-menu">
-        <a href="#"  class="filter-menu-items" data-category="all">.ALL</a>
-        <a href="#"  class="filter-menu-items" data-category="art">.ART</a>
-        <a href="#"  class="filter-menu-items" data-category="fashion">.FASHION</a>
-        <a href="#"  class="filter-menu-items" data-category="innovation">.INNOVATION</a>
-        <a href="#"  class="filter-menu-items" data-category="music">.MUSIC</a>
-        <a href="#"  class="filter-menu-items" data-category="visual-media">.VISUAL MEDIA</a>
+        <a href="#" class="filter-menu-items active" data-category="all">.ALL</a>
+        <a href="#" class="filter-menu-items" data-category="art">.ART</a>
+        <a href="#" class="filter-menu-items" data-category="fashion">.FASHION</a>
+        <a href="#" class="filter-menu-items" data-category="innovation">.INNOVATION</a>
+        <a href="#" class="filter-menu-items" data-category="music">.MUSIC</a>
+<!--         <a href="#" class="filter-menu-items" data-category="md:hidden lg:block visual-media">.VISUAL MEDIA</a> -->
       </div>
     </div>
   </div>
   
-  <!-- Empty Space Column (next to page header) -->
-  <div id="pageHeaderSpace" class="relative col-start-10 col-end-13 lg:col-start-10 lg:col-end-13">
-    <div id="empty-space" class="bg-slate-300 min-h-screen-95px z-20"></div>
+  <!-- Empty Space Column (matches desktop height) -->
+  <div id="pageHeaderSpace" class="relative hidden lg:block lg:col-start-10 lg:col-end-13">
+    <div id="empty-space" class="bg-slate-300 min-h-screen-63px lg:min-h-screen-95px z-20"></div>
   </div>
 </section>
