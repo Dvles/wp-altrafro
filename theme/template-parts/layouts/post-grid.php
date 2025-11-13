@@ -21,39 +21,36 @@
         <!-- RIGHT CONTENT - Grid for cards -->
          <div class="col-span-11">
              <div class="flex-1">
-                 <div class="grid grid-cols-11 gap-y-28 gap-x-[var(--grid-gutter)]">
+                 <div id="posts-grid" class="grid grid-cols-11 gap-y-28 gap-x-[var(--grid-gutter)]">
                      
-                     <?php
-                     $mag_query = new WP_Query([
-                         'post_type'      => 'post',
-                         'posts_per_page' => -1,
-                         'orderby'        => 'date',
-                         'order'          => 'DESC',
-                     ]);
-                     
-                     if ( $mag_query->have_posts() ) :
-                         $i = 0;
-                         while ( $mag_query->have_posts() ) :
-                             $mag_query->the_post();
-                             $i++;
-                             ?>
-                             
-                             <!-- CARD = 3 columns on desktop (3 out of 11 remaining columns) -->
-                             <article class="col-span-12 md:col-span-6 lg:col-span-3">
-                                 <?php get_template_part( 'template-parts/cards/card', 'default' ); ?>
-                             </article>
-                             
-                             <?php
-                             // Insert a 1-col gap after card 1 and 2, 4 and 5, 7 and 8, etc.
-                             if ( $i % 3 !== 0 ) {
-                                 echo '<div class="hidden lg:block col-span-1"></div>';
-                             }
-                         endwhile;
-                         wp_reset_postdata();
-                     else :
-                         echo '<p class="col-span-11">No articles yet.</p>';
-                     endif;
-                     ?>
+                    <?php
+                        $mag_query = new WP_Query([
+                        'post_type'      => 'post',
+                        'posts_per_page' => -1,
+                        'orderby'        => 'date',
+                        'order'          => 'DESC',
+                                            ]);
+                        if ( $mag_query->have_posts() ) :
+                        $i = 0;
+                        while ( $mag_query->have_posts() ) :
+                        $mag_query->the_post();
+                        $i++;
+                        ?>
+                        <!-- CARD = 3 columns on desktop (3 out of 11 remaining columns) -->
+                        <article class="col-span-12 md:col-span-6 lg:col-span-3">
+                        <?php get_template_part( 'template-parts/cards/card', 'default' ); ?>
+                        </article>
+                        <?php
+                        // Insert a 1-col gap after card 1 and 2, 4 and 5, 7 and 8, etc.
+                        if ( $i % 3 !== 0 ) {
+                        echo '<div class="hidden lg:block col-span-1 spacer"></div>';
+                                                    }
+                        endwhile;
+                        wp_reset_postdata();
+                        else :
+                        echo '<p class="col-span-11">No articles yet.</p>';
+                        endif;
+                    ?>
                      
                  </div>
              </div>

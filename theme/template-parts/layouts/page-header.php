@@ -21,11 +21,12 @@ $subheading = $args['subheading'] ?? 'subheading';
     <div id="pageHeader" class="bg-slate-300 min-h-screen-95px z-40 transition-all duration-300 global-padding">
       <h2 class="page-title"><?php echo esc_html($heading); ?></h2>
       <div class="filter-menu">
-        <a class="filter-menu-items">.ART</a>
-        <a class="filter-menu-items">.FASHION</a>
-        <a class="filter-menu-items">.INNOVATION</a>
-        <a class="filter-menu-items">.MUSIC</a>
-        <a class="filter-menu-items">.VISUAL MEDIA</a>
+        <a href="#"  class="filter-menu-items" data-category="all">.ALL</a>
+        <a href="#"  class="filter-menu-items" data-category="art">.ART</a>
+        <a href="#"  class="filter-menu-items" data-category="fashion">.FASHION</a>
+        <a href="#"  class="filter-menu-items" data-category="innovation">.INNOVATION</a>
+        <a href="#"  class="filter-menu-items" data-category="music">.MUSIC</a>
+        <a href="#"  class="filter-menu-items" data-category="visual-media">.VISUAL MEDIA</a>
       </div>
     </div>
   </div>
