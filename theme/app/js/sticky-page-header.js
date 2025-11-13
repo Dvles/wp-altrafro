@@ -1,21 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const header   = document.getElementById('pageHeader');
-  const sentinel = document.getElementById('sticky-sentinel');
-  const col      = header.parentElement;
+  const header      = document.getElementById('pageHeader');
+  const emptySpace  = document.getElementById('empty-space');
+  const sentinel    = document.getElementById('sticky-sentinel');
+  const col         = header.parentElement;
+  const colSpace    = emptySpace.parentElement;
 
   const applyFixedMetrics = () => {
-    const rect = col.getBoundingClientRect();
-    header.style.left  = `${rect.left}px`;
-    header.style.width = `${rect.width}px`;
-    header.style.top   = `0`; // stick right under the browser top
+    // Header metrics
+    const headerRect = col.getBoundingClientRect();
+    header.style.left  = `${headerRect.left}px`;
+    header.style.width = `${headerRect.width}px`;
+    header.style.top   = `0`;
+    
+    // Empty space metrics (separate calculation)
+    const spaceRect = colSpace.getBoundingClientRect();
+    emptySpace.style.left  = `${spaceRect.left}px`;
+    emptySpace.style.width = `${spaceRect.width}px`;
+    emptySpace.style.top   = `0`;
   };
 
   const clearFixedMetrics = () => {
     header.style.left = header.style.width = header.style.top = '';
+    emptySpace.style.left = emptySpace.style.width = emptySpace.style.top = '';
   };
 
   const setFixed = (fixed) => {
     header.classList.toggle('is-fixed', fixed);
+    emptySpace.classList.toggle('is-fixed', fixed);
     fixed ? applyFixedMetrics() : clearFixedMetrics();
   };
 
@@ -30,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', () => {
     if (header.classList.contains('is-fixed')) applyFixedMetrics();
   });
+  
   window.addEventListener('orientationchange', () => {
     if (header.classList.contains('is-fixed')) applyFixedMetrics();
   });

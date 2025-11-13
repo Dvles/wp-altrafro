@@ -3,7 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchPlaceholder = document.getElementById('search-placeholder');
   const searchClose = document.getElementById('search-close');
   const searchInput = document.getElementById('search-input');
-  const searchBackdrop = document.getElementById('search-backdrop'); // Add this
+  const searchBackdrop = document.getElementById('search-backdrop'); 
+  const pageHeader = document.getElementById('pageHeader');
   
   // Find all links that point to #search
   const allNavLinks = document.querySelectorAll('nav a[href*="#search"]');
@@ -18,6 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
       // Hide placeholder, show search bar
       searchPlaceholder?.classList.add('hidden');
       searchBar?.classList.remove('hidden');
+
+      // Hide page header
+      pageHeader?.classList.add('hidden');
+      
       
       // Show backdrop
       searchBackdrop?.classList.remove('hidden');
@@ -37,6 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hide backdrop
     searchBackdrop?.classList.remove('active');
     setTimeout(() => searchBackdrop?.classList.add('hidden'), 300);
+
+      // Hide page header
+      pageHeader?.classList.remove('hidden');
   };
 
   searchClose?.addEventListener('click', closeSearch);
