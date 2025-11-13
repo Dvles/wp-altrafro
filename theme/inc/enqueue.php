@@ -37,5 +37,10 @@ function altr_enqueue_assets() {
     $mobile_js_path = get_theme_file_path('app/js/mobile-menu.js');
     $mobile_js_ver = file_exists($mobile_js_path) ? filemtime($mobile_js_path) : ALTR_VERSION;
     wp_enqueue_script('altr-mobile-menu', get_theme_file_uri('app/js/mobile-menu.js'), [], $mobile_js_ver, true);
+
+    // Sticky page header JS
+    $mobile_js_path = get_theme_file_path('app/js/sticky-page-header.js');
+    $mobile_js_ver = file_exists($mobile_js_path) ? filemtime($mobile_js_path) : ALTR_VERSION;
+    wp_enqueue_script('altr-sticky-page-header', get_theme_file_uri('app/js/sticky-page-header.js'), [], $mobile_js_ver, true);
 }
 add_action('wp_enqueue_scripts', 'altr_enqueue_assets', 20);
