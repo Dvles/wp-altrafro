@@ -9,11 +9,11 @@
     <div class="grid grid-cols-12 flex gap-x-[var(--grid-gutter)]">
         
         <!-- LEFT VERTICAL STRIP - Sticky sidebar -->
-        <aside class="hidden lg:block flex-shrink-0 col-span-1" style="width: calc((100% - (var(--grid-gutter) * 11)) / 12);">
-            <div class="sticky top-[100px] h-screen flex items-end justify-center pb-12">
-                <span class="block uppercase tracking-wide text-7xl 
+        <aside class=" hidden lg:block flex-shrink-0 col-span-1" style="width: calc((100% - (var(--grid-gutter) * 11)) / 12);">
+            <div class=" top-[100px] h-screen flex items-end justify-center pb-12">
+                <span class="!sticky top-0 block uppercase tracking-wide text-7xl 
                              [writing-mode:vertical-lr] [text-orientation:mixed] rotate-180">
-                    ART>ART>ART>ART>ART>ART>ART>ART>ART>
+                    <!-- ART>ART>ART>ART>ART>ART>ART>ART>ART> -->
                 </span>
             </div>
         </aside>

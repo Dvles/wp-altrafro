@@ -146,6 +146,12 @@
 
   .grid-cols-11 {
     grid-template-columns: repeat(11, minmax(0, 1fr));
+  }
+
+  .is-sticky {
+  @apply bg-gray-50 shadow-md;
+
+  
 }
 
 
