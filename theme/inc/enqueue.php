@@ -52,6 +52,13 @@ function altr_enqueue_assets() {
     $filter_posts_js_ver = file_exists($filter_posts_js_path) ? filemtime($filter_posts_js_path) : ALTR_VERSION;
     wp_enqueue_script('altr-filter-posts', get_theme_file_uri('app/js/filter-posts.js'), [], $filter_posts_js_ver, true);
     
+
+    // Dropdown filter menu for magazine filters
+    $filter_menu_js_path = get_theme_file_path('app/js/magazine-filter-menu.js');
+    $filter_menus_js_ver = file_exists($filter_menu_js_path) ? filemtime($filter_menu_js_path) : ALTR_VERSION;
+    wp_enqueue_script('altr-filter-magazine-filter-menu', get_theme_file_uri('app/js/magazine-filter-menu.js'), [], $filter_menus_js_ver, true);
+    
+
     // Localize script to pass ajaxurl to JavaScript
     wp_localize_script('altr-filter-posts', 'altrAjax', [
         'ajaxurl' => admin_url('admin-ajax.php')

@@ -6,6 +6,13 @@
  */
 $heading    = $args['heading']    ?? 'Page title';
 $subheading = $args['subheading'] ?? 'subheading';
+$mag_filters = [
+    ['slug' => 'all',        'label' => '.ALL'],
+    ['slug' => 'art',        'label' => '.ART'],
+    ['slug' => 'fashion',    'label' => '.FASHION'],
+    ['slug' => 'innovation', 'label' => '.INNOVATION'],
+    ['slug' => 'music',      'label' => '.MUSIC'],
+];
 ?>
 
 <style>
@@ -14,21 +21,26 @@ $subheading = $args['subheading'] ?? 'subheading';
 
 <section class="page-grid">
   <!-- Page Header Column -->
-  <div class="relative col-start-3 col-end-11 lg:col-start-2 lg:col-end-10">
+  <div class=" relative col-start-3 col-end-11 lg:col-start-2 lg:col-end-10">
     <!-- Sentinel sits above the header to trigger fixing -->
     <div id="sticky-sentinel" class="h-px"></div>
     
     <!-- Mobile: min-h-screen-63px with no vertical padding, Desktop: min-h-screen-95px with py-4 -->
-    <div id="pageHeader" class="bg-slate-300 min-h-screen-63px px-4 py-0 lg:min-h-screen-95px z-40 transition-all duration-300 lg:py-4 flex flex-col justify-center lg:justify-start">
+    <div id="pageHeader" class="  bg-slate-300 min-h-screen-63px px-4 py-0 lg:min-h-screen-95px z-40 transition-all duration-300 lg:py-4 flex flex-col justify-center lg:justify-start">
       <h2 class="page-title"><?php echo esc_html($heading); ?></h2>
-      <div class="filter-menu">
-        <a href="#" class="filter-menu-items active" data-category="all">.ALL</a>
-        <a href="#" class="filter-menu-items" data-category="art">.ART</a>
-        <a href="#" class="filter-menu-items" data-category="fashion">.FASHION</a>
-        <a href="#" class="filter-menu-items" data-category="innovation">.INNOVATION</a>
-        <a href="#" class="filter-menu-items" data-category="music">.MUSIC</a>
-<!--         <a href="#" class="filter-menu-items" data-category="md:hidden lg:block visual-media">.VISUAL MEDIA</a> -->
-      </div>
+    <?php
+      get_template_part(
+          'template-parts/components/magazine-filter-menu',
+          null,
+          ['filters' => $mag_filters, 'variant' => 'desktop']
+      );
+
+      get_template_part(
+          'template-parts/components/magazine-filter-menu',
+          null,
+          ['filters' => $mag_filters, 'variant' => 'mobile']
+      );
+    ?>
     </div>
   </div>
   
