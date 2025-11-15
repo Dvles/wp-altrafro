@@ -89,7 +89,7 @@
     @apply text-2xl lg:text-xl uppercase font-metro leading-tight font-light flex items-start;
   }
   .card-title {
-    @apply text-base md:text-xl uppercase font-metro leading-tight font-light flex items-start;
+    @apply text-base md:text-xl uppercase font-metro leading-tight font-light items-start;
   }
 
   .card-excerpt {
@@ -142,18 +142,23 @@
     /* Superscript pour les numéros de série */
   sup {
     font-size: 0.6em;
-    font-weight: inherit;
+    font-weight:500;
+    padding-left: 2px;
     line-height: 0;
     position: relative;
     vertical-align: baseline;
-    top:0.5em;
+    top:0.4em;
   }
-  
-  /* Style spécifique pour CBD numbers */
-  .card-title sup,
+
   .hero-headline sup,
   .post-title sup {
     font-size: 0.5em;
+
+  }
+
+  .card-title sup {
+    font-size: 0.5em;
+    top:-1em;
   }
 
   .grid-cols-11 {
