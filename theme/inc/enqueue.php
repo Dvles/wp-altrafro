@@ -56,7 +56,17 @@ function altr_enqueue_assets() {
     // Dropdown filter menu for magazine filters
     $filter_menu_js_path = get_theme_file_path('app/js/magazine-filter-menu.js');
     $filter_menus_js_ver = file_exists($filter_menu_js_path) ? filemtime($filter_menu_js_path) : ALTR_VERSION;
-    wp_enqueue_script('altr-filter-magazine-filter-menu', get_theme_file_uri('app/js/magazine-filter-menu.js'), [], $filter_menus_js_ver, true);
+
+    wp_enqueue_script(
+        'altr-filter-magazine-filter-menu',
+        get_theme_file_uri('app/js/magazine-filter-menu.js'),
+        [],
+        $filter_menus_js_ver,
+        true
+    );
+
+
+
     
 
     // Localize script to pass ajaxurl to JavaScript

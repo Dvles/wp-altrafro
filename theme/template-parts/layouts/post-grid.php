@@ -19,7 +19,7 @@
         </aside>
         
         <!-- RIGHT CONTENT - Grid for cards -->
-        <div class="col-span-12 lg:col-span-11">
+        <div class="col-span-12 lg:col-span-11 pb-12">
             <div class="flex-1">
                 <div id="posts-grid" class="grid grid-cols-12 lg:grid-cols-11 gap-y-8 lg:gap-y-28 gap-x-[var(--grid-gutter)]">
                     <?php

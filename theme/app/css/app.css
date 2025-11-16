@@ -169,7 +169,16 @@
   @apply bg-gray-50 shadow-md;
 
   
+
+  
 }
+  .filter-menu-items {
+    @apply text-base md:text-base uppercase font-metro leading-tight font-light flex items-start hover:bg-hypergreen;
+  }
+
+  .filter-menu-toggle {
+    @apply text-base md:text-base uppercase font-metro leading-tight font-light flex items-start;
+  }
 
 
 }
