@@ -165,13 +165,40 @@
     grid-template-columns: repeat(11, minmax(0, 1fr));
   }
 
-  .is-sticky {
-  @apply bg-gray-50 shadow-md;
-
-  
-
-  
+.is-sticky {
+  position: relative;
+  border: none;              /* important: no real borders */
 }
+
+/* Left black stroke */
+.is-sticky::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;                 /* full height */
+  width: 1px;
+  background: #000;
+}
+
+/* Bottom white stroke */
+.is-sticky::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: #fff;
+}
+
+/* The spacer column shouldn't draw anything when sticky */
+#empty-space.is-sticky {
+  border: none !important;
+}
+
+
+
   .filter-menu-items {
     @apply text-base md:text-base uppercase font-metro leading-tight font-light flex items-start hover:bg-hypergreen;
   }

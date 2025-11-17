@@ -16,7 +16,7 @@ $mag_filters = [
 ?>
 
 <style>
-  .is-fixed { position: fixed; top: 0; }
+  .is-fixed { position: fixed; top: 0; padding-bottom: 1px; }
 </style>
 
 <section class="page-grid">
@@ -26,8 +26,8 @@ $mag_filters = [
     <div id="sticky-sentinel" class="h-px"></div>
     
     <!-- Mobile: min-h-screen-63px with no vertical padding, Desktop: min-h-screen-95px with py-4 -->
-    <div id="pageHeader" class="  bg-slate-300 min-h-screen-63px px-4 py-0 lg:min-h-screen-95px z-40 transition-all duration-300 lg:py-4 flex flex-col justify-center lg:justify-start">
-      <h2 class="page-title"><?php echo esc_html($heading); ?></h2>
+    <div id="pageHeader" class="  bg-white min-h-screen-63px px-4 py-0 lg:min-h-screen-95px z-40 transition-all duration-300 lg:py-4 flex flex-col justify-center lg:justify-start">
+      <h2 class="page-title z-5"><?php echo esc_html($heading); ?></h2>
     <?php
       get_template_part(
           'template-parts/components/magazine-filter-menu',
@@ -46,6 +46,6 @@ $mag_filters = [
   
   <!-- Empty Space Column (matches desktop height) -->
   <div id="pageHeaderSpace" class="relative hidden lg:block lg:col-start-10 lg:col-end-13">
-    <div id="empty-space" class="bg-slate-300 min-h-screen-63px lg:min-h-screen-95px z-20"></div>
+<div id="empty-space" class="bg-white min-h-screen-63px lg:min-h-screen-95px z-20"></div>
   </div>
 </section>

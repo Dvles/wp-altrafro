@@ -12,9 +12,9 @@
     <div class="wrapper-nopad">
       <div class="page-grid">
         <!-- Logo: always visible -->
-        <a href="<?= esc_url(home_url('/')); ?>" class="h-16 md:h-auto col-span-2 lg:col-span-1 flex border-l border-b border-r border-black bg-white/90 backdrop-blur z-30">
-          <span class="block w-full bg-black"></span>
-        </a>
+<a href="<?= esc_url(home_url('/')); ?>" class="h-16 md:h-auto col-span-2 lg:col-span-1 flex border-l border-b border-r border-black bg-black z-30">
+  <span class="block w-full bg-black"></span>
+</a>
 
         <!-- Search overlay -->
         <?php get_template_part('template-parts/search-overlay'); ?>
@@ -34,7 +34,7 @@
         <nav id="main-nav"
      class="hidden lg:block lg:col-span-3 transition-all duration-500 ease-in-out bg-white/90 backdrop-blur relative z-50">
 
-          <div class="grid grid-cols-3 grid-rows-2">
+          <div class="grid grid-cols-3 grid-rows-2 Z-50">
             <?php
             $loc   = get_nav_menu_locations();
             $items = isset($loc['primary']) ? (wp_get_nav_menu_items($loc['primary']) ?: []) : [];
