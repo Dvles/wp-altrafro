@@ -14,36 +14,42 @@ if (!defined('ABSPATH')) {
  * @param int $post_id Post ID (optional, uses current post if not provided)
  * @return string Time difference (e.g., "2 hours ago", "just now")
  */
-function altr_time_ago($post_id = null) {
-    $post_time = get_the_time('U', $post_id);
-    $current_time = current_time('timestamp');
-    $time_diff = $current_time - $post_time;
+/**
+ * Get relative time (with optional short format)
+ *
+ * @param int $post_id Post ID
+ * @param bool $short Use abbreviated format
+ * @return string Time ago string
+ */
+function altr_time_ago($post_id = null, $short = false) {
+    if (!$post_id) {
+        $post_id = get_the_ID();
+    }
     
-    // Less than 1 minute
+    $time_diff = current_time('timestamp') - get_post_time('U', false, $post_id);
+    
     if ($time_diff < 60) {
-        return __('just now', ALTR_TEXT_DOMAIN);
-    }
-    
-    // Less than 1 hour
-    if ($time_diff < 3600) {
+        return $short ? '< 1m' : 'just now';
+    } elseif ($time_diff < 3600) {
         $mins = floor($time_diff / 60);
-        return sprintf(_n('%s min ago', '%s mins ago', $mins, ALTR_TEXT_DOMAIN), $mins);
-    }
-    
-    // Less than 24 hours
-    if ($time_diff < 86400) {
+        return $short ? $mins . 'm' : $mins . ' min' . ($mins > 1 ? 's' : '') . ' ago';
+    } elseif ($time_diff < 86400) {
         $hours = floor($time_diff / 3600);
-        return sprintf(_n('%s hour ago', '%s hours ago', $hours, ALTR_TEXT_DOMAIN), $hours);
-    }
-    
-    // Less than 7 days
-    if ($time_diff < 604800) {
+        return $short ? $hours . 'h' : $hours . ' hour' . ($hours > 1 ? 's' : '') . ' ago';
+    } elseif ($time_diff < 604800) {
         $days = floor($time_diff / 86400);
-        return sprintf(_n('%s day ago', '%s days ago', $days, ALTR_TEXT_DOMAIN), $days);
+        return $short ? $days . 'd' : $days . ' day' . ($days > 1 ? 's' : '') . ' ago';
+    } elseif ($time_diff < 2592000) {
+        $weeks = floor($time_diff / 604800);
+        return $short ? $weeks . 'w' : $weeks . ' week' . ($weeks > 1 ? 's' : '') . ' ago';
+    } else {
+        // For older posts, show date
+        if ($short) {
+            return get_the_date('j M', $post_id); // "4 Nov"
+        } else {
+            return get_the_date('j M Y', $post_id); // "4 Nov 2025"
+        }
     }
-    
-    // Show actual date for older posts
-    return get_the_date('j M Y');
 }
 
 /**
@@ -97,4 +103,30 @@ function altr_get_display_title($post_id = null) {
     }
     
     return $title;
+}
+
+/**
+ * Estimate reading time for a post
+ *
+ * @param int|null $post_id
+ * @param int      $wpm      words per minute
+ * @return string            e.g. "4 min"
+ */
+function altr_get_reading_time($post_id = null, $wpm = 200) {
+    if (!$post_id) {
+        $post_id = get_the_ID();
+    }
+
+    $content = get_post_field('post_content', $post_id);
+    if (!$content) {
+        return '';
+    }
+
+    $word_count = str_word_count( wp_strip_all_tags( $content ) );
+    if ($word_count === 0) {
+        return '';
+    }
+
+    $minutes = max(1, ceil($word_count / $wpm));
+    return $minutes . ' min';
 }

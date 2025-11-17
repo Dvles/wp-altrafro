@@ -78,6 +78,49 @@ function altr_register_acf_fields() {
                 'placeholder' => 'e.g., Creative by design ; exploration artistique approfondie',
                 'maxlength' => 200,
             ],
+            [
+                'key' => 'field_hero_media_flexible',
+                'label' => 'Hero Media',
+                'name' => 'hero_media',
+                'type' => 'flexible_content',
+                'instructions' => 'Choose an image or a video for the hero section.',
+                'layouts' => [
+                    'layout_hero_image' => [
+                        'key' => 'layout_hero_image',
+                        'name' => 'image',
+                        'label' => 'Image',
+                        'display' => 'block',
+                        'sub_fields' => [
+                            [
+                                'key' => 'field_hero_image',
+                                'label' => 'Hero Image',
+                                'name' => 'image',
+                                'type' => 'image',
+                                'return_format' => 'array',
+                                'preview_size'  => 'large',
+                                'library'       => 'all',
+                            ],
+                        ],
+                    ],
+                    'layout_hero_video' => [
+                        'key' => 'layout_hero_video',
+                        'name' => 'video',
+                        'label' => 'Video',
+                        'display' => 'block',
+                        'sub_fields' => [
+                            [
+                                'key' => 'field_hero_video',
+                                'label' => 'Hero Video (.mp4)',
+                                'name' => 'video',
+                                'type' => 'file',
+                                'return_format' => 'array',
+                                'library' => 'all',
+                                'mime_types' => 'mp4',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
         'location' => [
             [
