@@ -53,6 +53,10 @@
     @apply pl-4 pr-4 py-4;
   }
 
+  .global-padding-sides {
+    @apply pl-4 pr-4 ;
+  }
+
   .global-padding-mobile-cards {
     @apply pl-4 pr-4 py-4;
   }

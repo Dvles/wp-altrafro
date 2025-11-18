@@ -74,7 +74,7 @@ get_template_part(
 </section>
 
 <!-- ARTICLE BODY + SIDEBAR -->
-<section class="page-grid">
+<section class="page-grid mt-20 ">
   <!-- Sidebar -->
   <div class="col-start-2 col-end-4 lg:col-start-2 lg:col-end-4 mb-8 lg:mb-0">
     <?php get_template_part('template-parts/components/article-sidebar'); ?>
