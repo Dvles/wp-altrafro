@@ -76,12 +76,12 @@ get_template_part(
 <!-- ARTICLE BODY + SIDEBAR -->
 <section class="page-grid mt-20 ">
   <!-- Sidebar -->
-  <div class="col-start-2 col-end-4 lg:col-start-2 lg:col-end-4 mb-8 lg:mb-0">
+  <div class="md:hidden lg:block col-start-2 col-end-4 lg:col-start-2 lg:col-end-4 mb-8 lg:mb-0">
     <?php get_template_part('template-parts/components/article-sidebar'); ?>
   </div>
 
   <!-- Content -->
-  <div class="col-start-4 col-end-12 lg:col-start-4 lg:col-end-10 article-content global-padding-sides">
+  <div class="col-start-3 col-end-11 lg:col-start-4 lg:col-end-10 article-content global-padding-sides">
     <?php
     while (have_posts()) :
       the_post();
@@ -91,7 +91,7 @@ get_template_part(
   </div>
 
   <!-- Ad placement / promo -->
-  <div class="col-start-11 col-end-13 lg:col-start-11 lg:col-end-13 mt-96">
+  <div class="md:hidden lg:block  lg:col-start-11 lg:col-end-13 mt-96">
     xxx<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
   </div>
 </section>
