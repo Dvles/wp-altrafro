@@ -33,6 +33,7 @@ get_template_part(
         'heading'    => 'MAGAZINE1', // or get_the_title() if this is a page
         'subheading' => '',
         'filters'    => $mag_filters, // <-- this makes the filter menu appear
+        'type' => 'page',
     ]
 );
 ?>

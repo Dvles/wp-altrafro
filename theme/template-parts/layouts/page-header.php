@@ -10,13 +10,19 @@ $heading      = $args['heading']      ?? 'Page title';
 $subheading   = $args['subheading']   ?? '';
 $filters      = $args['filters']      ?? [];   // array of filters or []
 $show_filters = !empty($filters);              // show filter nav?
-?>
+$type         = $args['type']         ?? 'page';
 
+// Choose typography class based on type
+if ($type === 'post') {
+    $typeclasses = 'post-title';
+} else {
+    $typeclasses = 'page-title';
+}
+?>
 
 <style>
   .is-fixed { position: fixed; top: 0; padding-bottom: 1px; }
 </style>
-
 
 <section class="page-grid">
   <!-- Page Header Column -->
@@ -31,7 +37,9 @@ $show_filters = !empty($filters);              // show filter nav?
              z-40 transition-all duration-300 lg:py-4
              flex flex-col justify-center lg:justify-start"
     >
-      <h2 class="page-title"><?php echo esc_html($heading); ?></h2>
+      <h2 class="<?php echo esc_attr($typeclasses); ?>">
+        <?php echo esc_html($heading); ?>
+      </h2>
 
       <?php if ($subheading) : ?>
         <p class="text-sm uppercase tracking-wide mt-1">

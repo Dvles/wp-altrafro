@@ -24,6 +24,7 @@ get_template_part(
         'heading'    => $title,
         'subheading' => $seriesDescription,
         'filters'    => '',
+        'type' => 'post',
     ]
 );
 ?>
@@ -80,7 +81,7 @@ get_template_part(
   </div>
 
   <!-- Content -->
-  <div class="col-start-4 col-end-12 lg:col-start-5 lg:col-end-10 article-content">
+  <div class="col-start-4 col-end-12 lg:col-start-4 lg:col-end-10 article-content">
     <?php
     while (have_posts()) :
       the_post();

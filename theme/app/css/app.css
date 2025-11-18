@@ -76,6 +76,10 @@
     @apply text-2xl md:text-3xl uppercase font-metro font-bold;
   }
 
+  .post-title{
+    @apply text-2xl md:text-[26px]  font-metro font-bold;
+  }
+
   .filter-menu {
     @apply flex flex-row gap-2;
   }
