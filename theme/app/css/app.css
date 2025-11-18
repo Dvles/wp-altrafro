@@ -220,6 +220,12 @@
     margin: 0; 
     padding: 0; 
   }
+  /* Fix gutenberg default styling */
+  .article-content .wp-block {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 /* TEMP debug outlines */

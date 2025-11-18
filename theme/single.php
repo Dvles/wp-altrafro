@@ -80,7 +80,7 @@ get_template_part(
   </div>
 
   <!-- Content -->
-  <div class="col-start-4 col-end-12 lg:col-start-6 lg:col-end-10">
+  <div class="col-start-4 col-end-12 lg:col-start-5 lg:col-end-10 article-content">
     <?php
     while (have_posts()) :
       the_post();
@@ -90,7 +90,7 @@ get_template_part(
   </div>
 
   <!-- Ad placement / promo -->
-  <div class="col-start-4 col-end-12 lg:col-start-6 lg:col-end-10 mt-16 mt-96">
+  <div class="col-start-11 col-end-13 lg:col-start-11 lg:col-end-13 mt-96">
     xxx<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
   </div>
 </section>
