@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Enqueue scripts and styles
  *
@@ -11,7 +12,8 @@ if (!defined('ABSPATH')) {
 /**
  * Enqueue theme styles and scripts
  */
-function altr_enqueue_assets() {
+function altr_enqueue_assets()
+{
     // CSS
     $css_path = get_theme_file_path('dist/assets/app.css');
     $css_ver = file_exists($css_path) ? filemtime($css_path) : ALTR_VERSION;
@@ -51,7 +53,7 @@ function altr_enqueue_assets() {
     $filter_posts_js_path = get_theme_file_path('app/js/filter-posts.js');
     $filter_posts_js_ver = file_exists($filter_posts_js_path) ? filemtime($filter_posts_js_path) : ALTR_VERSION;
     wp_enqueue_script('altr-filter-posts', get_theme_file_uri('app/js/filter-posts.js'), [], $filter_posts_js_ver, true);
-    
+
 
     // Dropdown filter menu for magazine filters
     $filter_menu_js_path = get_theme_file_path('app/js/magazine-filter-menu.js');
@@ -65,9 +67,20 @@ function altr_enqueue_assets() {
         true
     );
 
+    // Post block styles
+    add_action('enqueue_block_editor_assets', function () {
+        wp_enqueue_script(
+            'altr-block-styles',
+            get_template_directory_uri() . '/block-styles.js',
+            ['wp-blocks', 'wp-dom-ready', 'wp-edit-post'],
+            filemtime(get_template_directory() . '/block-styles.js')
+        );
+    });
 
 
-    
+
+
+
 
     // Localize script to pass ajaxurl to JavaScript
     wp_localize_script('altr-filter-posts', 'altrAjax', [

@@ -81,7 +81,7 @@ get_template_part(
   </div>
 
   <!-- Content -->
-  <div class="col-start-4 col-end-12 lg:col-start-4 lg:col-end-10 article-content">
+  <div class="col-start-4 col-end-12 lg:col-start-4 lg:col-end-10 article-content global-padding-sides">
     <?php
     while (have_posts()) :
       the_post();
