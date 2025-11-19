@@ -173,109 +173,112 @@
     grid-template-columns: repeat(11, minmax(0, 1fr));
   }
 
-.is-sticky {
-  position: relative;
-  border: none;              /* important: no real borders */
-}
+  .is-sticky {
+    position: relative;
+    border: none;              /* important: no real borders */
+  }
 
-/* Left black stroke */
-.is-sticky::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;                 /* full height */
-  width: 1px;
-  background: #000;
-}
+  /* Left black stroke */
+  .is-sticky::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;                 /* full height */
+    width: 1px;
+    background: #000;
+  }
 
-/* Bottom white stroke */
-.is-sticky::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background: #fff;
-}
+  /* Bottom white stroke */
+  .is-sticky::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: #fff;
+  }
 
-/* The spacer column shouldn't draw anything when sticky */
-#empty-space.is-sticky {
-  border: none !important;
-}
+  /* The spacer column shouldn't draw anything when sticky */
+  #empty-space.is-sticky {
+    border: none !important;
+  }
 
-.filter-menu-items {
-  @apply text-base md:text-base uppercase font-metro leading-tight font-light flex items-start hover:bg-hypergreen;
-}
+  .filter-menu-items {
+    @apply text-base md:text-base uppercase font-metro leading-tight font-light flex items-start hover:bg-hypergreen;
+  }
 
-.filter-menu-toggle {
-  @apply text-base md:text-base uppercase font-metro leading-tight font-light flex items-start;
-}
-
-
-/* Magazine Article Styles */
-.article-content p {
-    @apply text-base tracking-tight mb-6 max-w-none lg:max-w-[90%];
-}
-
-.article-content .is-style-intro {
-    @apply text-lg leading-relaxed font-light mb-48;
-}
-
-.article-content .is-style-outro {
-    @apply text-lg leading-relaxed mt-48 mb-24;
-}
-
-/* For WYSIWYG content */
-.article-content .prose p {
-    @apply text-base tracking-tight mb-6 max-w-none lg:max-w-[90%];
-}
-
-/* Base article paragraphs */
-.article-content .article-body p {
-  @apply text-base tracking-tight mb-6 max-w-none lg:max-w-[90%];
-}
-
-/* Full-width images */
-.article-content .article-body figure,
-.article-content .article-body img {
-  @apply max-w-none w-full h-auto;
-}
-
-.article-content .article-body img[class*="size-"] {
-  @apply w-full max-w-none h-auto;
-}
-
-/* BIG EDITORIAL QUOTE */
-.article-content .article-body blockquote,
-.article-content .article-body figure.wp-block-quote blockquote {
-  @apply font-semibold not-italic text-3xl leading-tight my-16;
-}
+  .filter-menu-toggle {
+    @apply text-base md:text-base uppercase font-metro leading-tight font-light flex items-start;
+  }
 
 
+  /* ===========================================
+    MAGAZINE ARTICLE STYLES
+    =========================================== */
 
-.article-content .article-body figure.wp-block-quote cite {
-  @apply hidden;
-}
+  /* Intro */
+  .is-style-intro {
+      @apply text-lg leading-relaxed font-light mb-24;
+  }
 
-/* BIG EDITORIAL QUOTE */
-.article-content .article-body blockquote,
-.article-content .article-body figure.wp-block-quote blockquote {
-  @apply font-semibold not-italic text-3xl leading-tight my-16;
-}
+  /* Outro */
+  .is-style-outro {
+      @apply text-lg leading-relaxed mt-24 mb-12;
+      @apply lg:ml-[25%] lg:max-w-[75%];
+  }
 
-/* Make inner <p> match the big quote size (Classic + Gutenberg) */
-.article-content .article-body blockquote p,
-.article-content .article-body figure.wp-block-quote blockquote p {
-  @apply font-semibold not-italic text-3xl leading-tight;
-}
+  /* Article body - ALL direct children indented by default */
+  .article-body > * {
+      @apply lg:ml-[25%] lg:max-w-[75%];
+  }
 
-/* Optional: hide citation */
-.article-content .article-body figure.wp-block-quote cite {
-  @apply hidden;
-}
+  /* Paragraphs */
+  .article-body p {
+      @apply text-base tracking-tight mb-6;
+  }
 
+  /* Lists */
+  .article-body ul,
+  .article-body ol {
+      @apply mb-6;
+  }
+
+  /* Headings */
+  .article-body h2,
+  .article-body h3,
+  .article-body h4 {
+      @apply font-bold mb-4 mt-8;
+  }
+
+  /* Images */
+  .article-body figure {
+      @apply my-8;
+  }
+
+  .article-body figure img {
+      @apply w-full h-auto;
+  }
+
+  .article-body figure figcaption {
+      @apply text-[11px] font-mono mt-2 text-right;
+  }
+
+  /* Blockquotes - FULL WIDTH (override indent) */
+  .article-body > blockquote,
+  .article-body > figure.wp-block-quote {
+      @apply py-16;
+      @apply text-2xl lg:text-3xl font-semibold leading-tight;
+      margin-left: 0 !important;
+      max-width: 100% !important;
+  }
+
+  .article-body > blockquote p {
+      @apply text-2xl lg:text-3xl font-semibold leading-tight mb-0;
+      margin-left: 0 !important;
+      max-width: 100% !important;
+  }
 
 }
 

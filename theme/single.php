@@ -44,43 +44,44 @@ get_template_part(
   </section>
 <?php endif; ?>
 
-<!-- ARTICLE BODY + SIDEBAR -->
+<!-- SECTION 1: SIDEBAR + INTRO -->
 <section class="page-grid mt-20">
-  <!-- Sidebar -->
-  <div class="md:hidden lg:block col-start-2 col-end-4 lg:col-start-2 lg:col-end-4 mb-8 lg:mb-0">
-    <?php get_template_part('template-parts/components/article-sidebar'); ?>
-  </div>
+    <!-- Sidebar -->
+    <div class="hidden lg:block lg:col-start-2 lg:col-end-4">
+        <?php get_template_part('template-parts/components/article-sidebar'); ?>
+    </div>
 
-  <!-- Content -->
-  <div class="col-start-3 col-end-11 lg:col-start-4 lg:col-end-10 article-content global-padding-sides">
+    <!-- Intro -->
+    <div class="col-start-2 col-end-12 lg:col-start-4 lg:col-end-10">
+        <?php if ($introText) : ?>
+            <p class="is-style-intro">
+                <?php echo esc_html($introText); ?>
+            </p>
+        <?php endif; ?>
+    </div>
+</section>
 
-    <!-- INTRO -->
-    <?php if ($introText) : ?>
-      <p class="is-style-intro">
-        <?php echo esc_html($introText); ?>
-      </p>
-    <?php endif; ?>
+<!-- SECTION 2: MAIN CONTENT + ADS -->
+<section class="page-grid">
+    <!-- Main Content - full width cols 2-10 -->
+    <div class="col-start-2 col-end-12 lg:col-start-2 lg:col-end-10 article-content">
+        <?php if ($mainContent) : ?>
+            <div class="article-body">
+                <?php echo apply_filters('the_content', $mainContent); ?>
+            </div>
+        <?php endif; ?>
 
-    <!-- MAIN CONTENT -->
-<?php if ($mainContent) : ?>
-  <div class="article-body">
-    <?php echo apply_filters('the_content', $mainContent); ?>
-  </div>
-<?php endif; ?>
+        <?php if ($outroText) : ?>
+            <p class="is-style-outro">
+                <?php echo esc_html($outroText); ?>
+            </p>
+        <?php endif; ?>
+    </div>
 
-    <!-- OUTRO -->
-    <?php if ($outroText) : ?>
-      <p class="is-style-outro">
-        <?php echo esc_html($outroText); ?>
-      </p>
-    <?php endif; ?>
-
-  </div>
-
-  <!-- Ad placement -->
-  <div class="md:hidden lg:block lg:col-start-11 lg:col-end-13 mt-96">
-    <!-- placeholder -->
-  </div>
+    <!-- Ad placement -->
+    <div class="hidden lg:block lg:col-start-11 lg:col-end-13 lg:sticky lg:top-24 lg:self-start">
+        <!-- placeholder -->
+    </div>
 </section>
 
 <?php get_footer(); ?>
