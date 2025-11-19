@@ -9,14 +9,17 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Register ACF fields for posts
+ * Register ACF fields for posts & images
  */
 function altr_register_acf_fields() {
     // Check if ACF is active
     if (!function_exists('acf_add_local_field_group')) {
         return;
     }
-    
+
+    /**
+     * Register ACF fields for posts
+     */
     acf_add_local_field_group([
         'key' => 'group_post_meta',
         'title' => 'Post Meta',
@@ -137,8 +140,153 @@ function altr_register_acf_fields() {
         'label_placement' => 'top',
         'instruction_placement' => 'label',
     ]);
+
+
+    /**
+     * Register ACF fields for image credits (attachments)
+     */
+    acf_add_local_field_group([
+        'key' => 'group_image_credits',
+        'title' => 'Image Credits',
+        'fields' => [
+            [
+                'key' => 'field_credit_photographer',
+                'label' => 'Photographer / Artist',
+                'name' => 'credit_photographer',
+                'type' => 'text',
+                'instructions' => 'Credit the creator (required for editorial use)',
+                'required' => 1,
+                'placeholder' => 'e.g., Aisha Koné',
+            ],
+            [
+                'key' => 'field_credit_artwork_title',
+                'label' => 'Artwork Title',
+                'name' => 'credit_artwork_title',
+                'type' => 'text',
+                'instructions' => 'Name of the artwork or photograph',
+                'required' => 0,
+                'placeholder' => 'e.g., Sunset in Dakar',
+            ],
+            [
+                'key' => 'field_credit_year',
+                'label' => 'Year',
+                'name' => 'credit_year',
+                'type' => 'text',
+                'instructions' => 'Year created',
+                'required' => 0,
+                'placeholder' => 'e.g., 2024',
+            ],
+            [
+                'key' => 'field_credit_source',
+                'label' => 'Source / Website',
+                'name' => 'credit_source',
+                'type' => 'url',
+                'instructions' => 'Link to artist website or original source',
+                'required' => 0,
+                'placeholder' => 'https://artist-website.com',
+            ],
+        ],
+        'location' => [
+            [
+                [
+                    'param' => 'attachment',
+                    'operator' => '==',
+                    'value' => 'image',
+                ],
+            ],
+        ],
+        'menu_order' => 0,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+    ]);
+
+    
 }
 add_action('acf/init', 'altr_register_acf_fields');
+
+
+
+/**
+ * Get formatted image credit
+ */
+function altr_get_image_credit($attachment_id) {
+    if (!function_exists('get_field')) {
+        return '';
+    }
+    
+    $photographer = get_field('credit_photographer', $attachment_id);
+    if (!$photographer) {
+        return '';
+    }
+    
+    $title = get_field('credit_artwork_title', $attachment_id);
+    $year = get_field('credit_year', $attachment_id);
+    $source = get_field('credit_source', $attachment_id);
+    
+    $parts = [];
+    
+    if ($title) {
+        $parts[] = '<em>' . esc_html($title) . '</em>';
+    }
+    
+    $parts[] = '© ' . esc_html($photographer);
+    
+    if ($year) {
+        $parts[] = esc_html($year);
+    }
+    
+    $credit = implode(', ', $parts);
+    
+    if ($source) {
+        $credit = '<a href="' . esc_url($source) . '" target="_blank" rel="noopener">' . $credit . '</a>';
+    }
+    
+    return $credit;
+}
+
+
+/**
+ * Auto-append image credits to image blocks in content
+ */
+add_filter('render_block', 'altr_auto_image_credits', 10, 2);
+
+function altr_auto_image_credits($block_content, $block) {
+    // Only target image blocks
+    if ($block['blockName'] !== 'core/image') {
+        return $block_content;
+    }
+    
+    // Get attachment ID from block
+    $id = $block['attrs']['id'] ?? null;
+    if (!$id) return $block_content;
+    
+    // Get credit
+    $credit = altr_get_image_credit($id);
+    if (!$credit) return $block_content;
+    
+    // Append credit to figcaption
+    if (strpos($block_content, '</figcaption>') !== false) {
+        // Has existing caption - append
+        $block_content = str_replace(
+            '</figcaption>',
+            ' — ' . $credit . '</figcaption>',
+            $block_content
+        );
+    } else {
+        // No caption - add one
+        $block_content = str_replace(
+            '</figure>',
+            '<figcaption class="wp-element-caption text-[11px] font-mono mt-2 text-right">' . $credit . '</figcaption></figure>',
+            $block_content
+        );
+    }
+    
+    return $block_content;
+}
+
+
 
 
 /**
