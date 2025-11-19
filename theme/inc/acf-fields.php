@@ -166,3 +166,171 @@ function altr_register_acf_fields()
     ]);
 }
 add_action('acf/init', 'altr_register_acf_fields');
+
+/**
+ * ===========================================
+ * IMAGE CREDITS IN MEDIA MODAL
+ * ===========================================
+ */
+
+/**
+ * Add credit fields to media modal
+ */
+add_filter('attachment_fields_to_edit', function($form_fields, $post) {
+    if (strpos($post->post_mime_type, 'image') === false) {
+        return $form_fields;
+    }
+
+    $form_fields['altr_photographer'] = [
+        'label' => 'Photographer / Artist *',
+        'input' => 'text',
+        'value' => get_post_meta($post->ID, '_altr_photographer', true),
+        'helps' => 'Required - image won\'t display without credit',
+    ];
+
+    $form_fields['altr_artwork_title'] = [
+        'label' => 'Artwork Title',
+        'input' => 'text',
+        'value' => get_post_meta($post->ID, '_altr_artwork_title', true),
+    ];
+
+    $form_fields['altr_year'] = [
+        'label' => 'Year',
+        'input' => 'text',
+        'value' => get_post_meta($post->ID, '_altr_year', true),
+    ];
+
+    $form_fields['altr_source'] = [
+        'label' => 'Source URL',
+        'input' => 'text',
+        'value' => get_post_meta($post->ID, '_altr_source', true),
+    ];
+
+    return $form_fields;
+}, 10, 2);
+
+/**
+ * Save custom attachment fields
+ */
+add_filter('attachment_fields_to_save', function($post, $attachment) {
+    if (isset($attachment['altr_photographer'])) {
+        update_post_meta($post['ID'], '_altr_photographer', sanitize_text_field($attachment['altr_photographer']));
+    }
+    if (isset($attachment['altr_artwork_title'])) {
+        update_post_meta($post['ID'], '_altr_artwork_title', sanitize_text_field($attachment['altr_artwork_title']));
+    }
+    if (isset($attachment['altr_year'])) {
+        update_post_meta($post['ID'], '_altr_year', sanitize_text_field($attachment['altr_year']));
+    }
+    if (isset($attachment['altr_source'])) {
+        update_post_meta($post['ID'], '_altr_source', esc_url_raw($attachment['altr_source']));
+    }
+    return $post;
+}, 10, 2);
+
+/**
+ * Get formatted image credit
+ */
+function altr_get_image_credit($attachment_id) {
+    $photographer = get_post_meta($attachment_id, '_altr_photographer', true);
+    
+    if (!$photographer) {
+        return '';
+    }
+    
+    $title = get_post_meta($attachment_id, '_altr_artwork_title', true);
+    $year = get_post_meta($attachment_id, '_altr_year', true);
+    $source = get_post_meta($attachment_id, '_altr_source', true);
+    
+    $parts = [];
+    
+    if ($title) {
+        $parts[] = '<em>' . esc_html($title) . '</em>';
+    }
+    
+    $parts[] = '© ' . esc_html($photographer);
+    
+    if ($year) {
+        $parts[] = esc_html($year);
+    }
+    
+    $credit = implode(', ', $parts);
+    
+    if ($source) {
+        $credit = '<a href="' . esc_url($source) . '" target="_blank" rel="noopener">' . $credit . '</a>';
+    }
+    
+    return $credit;
+}
+
+/**
+ * Filter images in content - hide if no credit
+ */
+add_filter('the_content', function($content) {
+    if (empty($content)) {
+        return $content;
+    }
+    
+    // Find all images in content
+    $content = preg_replace_callback(
+        '/<img[^>]+>/i',
+        function($matches) {
+            $img = $matches[0];
+            
+            // Extract attachment ID from class
+            if (preg_match('/wp-image-(\d+)/', $img, $id_match)) {
+                $attachment_id = $id_match[1];
+                $credit = altr_get_image_credit($attachment_id);
+                
+                // If no credit, hide image
+                if (!$credit) {
+                    return '<!-- Image hidden: missing photographer credit -->';
+                }
+                
+                // Wrap image with figure and caption
+                return '<figure class="wp-block-image">' . $img . 
+                       '<figcaption class="text-[11px] font-mono mt-2 text-right">' . $credit . '</figcaption></figure>';
+            }
+            
+            return $img;
+        },
+        $content
+    );
+    
+    return $content;
+}, 20);
+
+/**
+ * Admin notice for missing credits
+ */
+add_action('admin_notices', function() {
+    global $pagenow, $post;
+    
+    if ($pagenow !== 'post.php' || !$post || $post->post_type !== 'post') {
+        return;
+    }
+    
+    $main_content = get_field('main_content', $post->ID);
+    if (empty($main_content)) {
+        return;
+    }
+    
+    // Count images without credits
+    $missing = 0;
+    preg_match_all('/wp-image-(\d+)/', $main_content, $matches);
+    
+    if (!empty($matches[1])) {
+        foreach ($matches[1] as $attachment_id) {
+            if (!get_post_meta($attachment_id, '_altr_photographer', true)) {
+                $missing++;
+            }
+        }
+    }
+    
+    if ($missing > 0) {
+        echo '<div class="notice notice-warning"><p>';
+        echo '<strong>⚠️ ' . $missing . ' image(s) missing photographer credits.</strong> ';
+        echo 'Images without credits will be hidden on the frontend.';
+        echo '</p></div>';
+    }
+});

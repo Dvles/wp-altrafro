@@ -135,3 +135,4 @@ function altr_the_series_number($post_id = null)
         echo '<sup>' . esc_html($number) . '</sup>';
     }
 }
+
