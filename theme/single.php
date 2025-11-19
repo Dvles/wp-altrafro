@@ -57,7 +57,7 @@ get_template_part(
         
         <!-- INTRO -->
         <?php if ($introText) : ?>
-            <p class="text-lg leading-relaxed font-light mb-12">
+            <p class="is-style-intro">
                 <?php echo esc_html($introText); ?>
             </p>
         <?php endif; ?>
@@ -71,7 +71,7 @@ get_template_part(
 
         <!-- OUTRO -->
         <?php if ($outroText) : ?>
-            <p class="text-lg leading-relaxed mt-12">
+            <p class="is-style-outro">
                 <?php echo esc_html($outroText); ?>
             </p>
         <?php endif; ?>

@@ -11,7 +11,6 @@ export default defineConfig({
         app:  path.resolve(__dirname, "app/css/app.css"),
         main: path.resolve(__dirname, "app/js/main.js"),
         editor: 'app/css/editor.css',
-      'block-styles': 'app/js/block-styles.js'
       },
       output: {
         // No hashing: always write fixed names

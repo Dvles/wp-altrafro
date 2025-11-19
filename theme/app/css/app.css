@@ -216,26 +216,20 @@
 
 /* Magazine Article Styles */
 .article-content p {
-  @apply text-base tracking-tight mb-6 max-w-none lg:max-w-[90%] ;
+    @apply text-base tracking-tight mb-6 max-w-none lg:max-w-[90%];
 }
 
-.article-content p.is-style-intro {
-  @apply text-lg leading-relaxed font-light mb-48 ;
+.article-content .is-style-intro {
+    @apply text-lg leading-relaxed font-light mb-48;
 }
 
-.article-content p.is-style-outro {
-  @apply text-lg leading-relaxed mt-48 mb-24;
+.article-content .is-style-outro {
+    @apply text-lg leading-relaxed mt-48 mb-24;
 }
 
-.is-style-tweetable {
-  @apply border-l-4 border-black pl-4 italic relative;
-}
-
-.is-style-tweetable::after {
-  content: "Tweet";
-  @apply absolute right-0 top-1/2 -translate-y-1/2
-    text-[10px] uppercase font-mono cursor-pointer
-    px-2 py-1 hover:bg-hypergreen;
+/* For WYSIWYG content */
+.article-content .prose p {
+    @apply text-base tracking-tight mb-6 max-w-none lg:max-w-[90%];
 }
 
 /* Image with right-aligned caption */

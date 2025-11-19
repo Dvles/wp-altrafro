@@ -63,3 +63,21 @@ function altr_setup()
     ] );
 }
 add_action('after_setup_theme', 'altr_setup');
+
+
+/**
+ * Disable Gutenberg for posts (using ACF instead)
+ */
+add_filter('use_block_editor_for_post_type', function($use, $post_type) {
+    if ($post_type === 'post') {
+        return false;
+    }
+    return $use;
+}, 10, 2);
+
+/**
+ * Remove default editor from posts (content is in ACF fields)
+ */
+add_action('init', function() {
+    remove_post_type_support('post', 'editor');
+});

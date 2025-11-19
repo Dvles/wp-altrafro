@@ -78,27 +78,4 @@ add_action('wp_enqueue_scripts', 'altr_enqueue_assets', 20);
 
 
 
-/**
- * Enqueue block editor assets (SEPARATE from frontend)
- */
-function altr_enqueue_block_editor_assets()
-{
-    wp_enqueue_script(
-        'altr-block-styles',
-        get_template_directory_uri() . '/dist/assets/block-styles.js',
-        ['wp-blocks', 'wp-dom-ready', 'wp-element'],
-        filemtime(get_template_directory() . '/dist/assets/block-styles.js'),
-        true
-    );
-
-    // Force expanded media modal in editor (shows ACF fields)
-    wp_add_inline_script('wp-block-editor', "
-        wp.domReady(function() {
-            if (wp.media) {
-                wp.media.controller.Library.prototype.defaults.contentUserSetting = false;
-            }
-        });
-    ");
-}
-add_action('enqueue_block_editor_assets', 'altr_enqueue_block_editor_assets');
 
