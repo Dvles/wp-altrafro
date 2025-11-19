@@ -174,41 +174,41 @@ add_action('acf/init', 'altr_register_acf_fields');
  */
 
 /**
- * Add credit fields to media modal
+ * Add credit fields to media modal (at the top)
  */
 add_filter('attachment_fields_to_edit', function($form_fields, $post) {
     if (strpos($post->post_mime_type, 'image') === false) {
         return $form_fields;
     }
 
-    $form_fields['altr_photographer'] = [
-        'label' => 'Photographer / Artist *',
-        'input' => 'text',
-        'value' => get_post_meta($post->ID, '_altr_photographer', true),
-        'helps' => 'Required - image won\'t display without credit',
+    // Create credit fields first
+    $credit_fields = [
+        'altr_photographer' => [
+            'label' => '⚠️ Photographer / Artist *',
+            'input' => 'text',
+            'value' => get_post_meta($post->ID, '_altr_photographer', true),
+            'helps' => 'REQUIRED - image won\'t display without credit',
+        ],
+        'altr_artwork_title' => [
+            'label' => 'Artwork Title',
+            'input' => 'text',
+            'value' => get_post_meta($post->ID, '_altr_artwork_title', true),
+        ],
+        'altr_year' => [
+            'label' => 'Year',
+            'input' => 'text',
+            'value' => get_post_meta($post->ID, '_altr_year', true),
+        ],
+        'altr_source' => [
+            'label' => 'Source URL',
+            'input' => 'text',
+            'value' => get_post_meta($post->ID, '_altr_source', true),
+        ],
     ];
 
-    $form_fields['altr_artwork_title'] = [
-        'label' => 'Artwork Title',
-        'input' => 'text',
-        'value' => get_post_meta($post->ID, '_altr_artwork_title', true),
-    ];
-
-    $form_fields['altr_year'] = [
-        'label' => 'Year',
-        'input' => 'text',
-        'value' => get_post_meta($post->ID, '_altr_year', true),
-    ];
-
-    $form_fields['altr_source'] = [
-        'label' => 'Source URL',
-        'input' => 'text',
-        'value' => get_post_meta($post->ID, '_altr_source', true),
-    ];
-
-    return $form_fields;
+    // Merge credit fields BEFORE other fields
+    return array_merge($credit_fields, $form_fields);
 }, 10, 2);
-
 /**
  * Save custom attachment fields
  */
@@ -334,3 +334,40 @@ add_action('admin_notices', function() {
         echo '</p></div>';
     }
 });
+
+/**
+ * Filter ACF WYSIWYG content - hide images without credits
+ */
+add_filter('acf/format_value/type=wysiwyg', function($value, $post_id, $field) {
+    if (empty($value)) {
+        return $value;
+    }
+    
+    // Find all images in content
+    $value = preg_replace_callback(
+        '/<img[^>]+>/i',
+        function($matches) {
+            $img = $matches[0];
+            
+            // Extract attachment ID from class
+            if (preg_match('/wp-image-(\d+)/', $img, $id_match)) {
+                $attachment_id = $id_match[1];
+                $credit = altr_get_image_credit($attachment_id);
+                
+                // If no credit, hide image
+                if (!$credit) {
+                    return '<!-- Image hidden: missing photographer credit -->';
+                }
+                
+                // Wrap image with figure and caption
+                return '<figure class="wp-block-image">' . $img . 
+                       '<figcaption class="text-[11px] font-mono mt-2 text-right">' . $credit . '</figcaption></figure>';
+            }
+            
+            return $img;
+        },
+        $value
+    );
+    
+    return $value;
+}, 20, 3);
