@@ -21,4 +21,5 @@ require_once get_template_directory() . '/inc/acf-fields.php';
 require_once get_template_directory() . '/inc/fixtures.php';
 require_once get_template_directory() . '/inc/ajax-handler.php';
 require_once get_template_directory() . '/inc/block-styles.php';
+require_once get_template_directory() . '/inc/acf-helpers.php';
 
