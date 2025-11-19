@@ -90,5 +90,15 @@ function altr_enqueue_block_editor_assets()
         filemtime(get_template_directory() . '/dist/assets/block-styles.js'),
         true
     );
+
+    // Force expanded media modal in editor (shows ACF fields)
+    wp_add_inline_script('wp-block-editor', "
+        wp.domReady(function() {
+            if (wp.media) {
+                wp.media.controller.Library.prototype.defaults.contentUserSetting = false;
+            }
+        });
+    ");
 }
 add_action('enqueue_block_editor_assets', 'altr_enqueue_block_editor_assets');
+
