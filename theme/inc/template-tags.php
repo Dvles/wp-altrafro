@@ -108,25 +108,60 @@ function altr_get_display_title($post_id = null) {
 /**
  * Estimate reading time for a post
  *
+ * Works with the ACF-based article structure:
+ * - intro_text (textarea)
+ * - main_content (wysiwyg)
+ * - outro_text (textarea)
+ *
+ * Falls back to standard post_content if those fields are empty.
+ *
  * @param int|null $post_id
- * @param int      $wpm      words per minute
- * @return string            e.g. "4 min"
+ * @param int      $wpm      Words per minute
+ * @return string            e.g. "4 min" or "" if no content
  */
-function altr_get_reading_time($post_id = null, $wpm = 200) {
-    if (!$post_id) {
+function altr_get_reading_time( $post_id = null, $wpm = 200 ) {
+    if ( ! $post_id ) {
         $post_id = get_the_ID();
     }
 
-    $content = get_post_field('post_content', $post_id);
-    if (!$content) {
+    // Try ACF fields first
+    $intro  = function_exists( 'get_field' ) ? get_field( 'intro_text', $post_id )  : '';
+    $main   = function_exists( 'get_field' ) ? get_field( 'main_content', $post_id ) : '';
+    $outro  = function_exists( 'get_field' ) ? get_field( 'outro_text', $post_id )  : '';
+
+    $parts = [];
+
+    if ( $intro ) {
+        $parts[] = $intro;
+    }
+
+    if ( $main ) {
+        $parts[] = $main;
+    }
+
+    if ( $outro ) {
+        $parts[] = $outro;
+    }
+
+    if ( ! empty( $parts ) ) {
+        // Join intro + main + outro for counting
+        $content = implode( "\n\n", $parts );
+    } else {
+        // Fallback: classic post content
+        $content = get_post_field( 'post_content', $post_id );
+    }
+
+    if ( ! $content ) {
         return '';
     }
 
+    // Strip HTML and count words
     $word_count = str_word_count( wp_strip_all_tags( $content ) );
-    if ($word_count === 0) {
+    if ( $word_count === 0 ) {
         return '';
     }
 
-    $minutes = max(1, ceil($word_count / $wpm));
+    $minutes = max( 1, ceil( $word_count / $wpm ) );
+
     return $minutes . ' min';
 }
