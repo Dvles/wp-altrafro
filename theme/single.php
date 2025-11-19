@@ -62,11 +62,11 @@ get_template_part(
     <?php endif; ?>
 
     <!-- MAIN CONTENT -->
-    <?php if ($mainContent) : ?>
-      <div class="prose">
-        <?php echo apply_filters('the_content', $mainContent); ?>
-      </div>
-    <?php endif; ?>
+<?php if ($mainContent) : ?>
+  <div class="article-body">
+    <?php echo apply_filters('the_content', $mainContent); ?>
+  </div>
+<?php endif; ?>
 
     <!-- OUTRO -->
     <?php if ($outroText) : ?>

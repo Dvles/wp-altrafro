@@ -232,10 +232,50 @@
     @apply text-base tracking-tight mb-6 max-w-none lg:max-w-[90%];
 }
 
-/* Image with right-aligned caption */
-.is-style-caption-right figcaption {
-  @apply text-right text-xs italic opacity-70 mt-2;
+/* Base article paragraphs */
+.article-content .article-body p {
+  @apply text-base tracking-tight mb-6 max-w-none lg:max-w-[90%];
 }
+
+/* Full-width images */
+.article-content .article-body figure,
+.article-content .article-body img {
+  @apply max-w-none w-full h-auto;
+}
+
+.article-content .article-body img[class*="size-"] {
+  @apply w-full max-w-none h-auto;
+}
+
+/* BIG EDITORIAL QUOTE */
+.article-content .article-body blockquote,
+.article-content .article-body figure.wp-block-quote blockquote {
+  @apply font-semibold not-italic text-3xl leading-tight my-16;
+}
+
+
+
+.article-content .article-body figure.wp-block-quote cite {
+  @apply hidden;
+}
+
+/* BIG EDITORIAL QUOTE */
+.article-content .article-body blockquote,
+.article-content .article-body figure.wp-block-quote blockquote {
+  @apply font-semibold not-italic text-3xl leading-tight my-16;
+}
+
+/* Make inner <p> match the big quote size (Classic + Gutenberg) */
+.article-content .article-body blockquote p,
+.article-content .article-body figure.wp-block-quote blockquote p {
+  @apply font-semibold not-italic text-3xl leading-tight;
+}
+
+/* Optional: hide citation */
+.article-content .article-body figure.wp-block-quote cite {
+  @apply hidden;
+}
+
 
 }
 
