@@ -209,6 +209,7 @@ add_filter('attachment_fields_to_edit', function($form_fields, $post) {
     // Merge credit fields BEFORE other fields
     return array_merge($credit_fields, $form_fields);
 }, 10, 2);
+
 /**
  * Save custom attachment fields
  */
@@ -264,43 +265,6 @@ function altr_get_image_credit($attachment_id) {
 }
 
 /**
- * Filter images in content - hide if no credit
- */
-add_filter('the_content', function($content) {
-    if (empty($content)) {
-        return $content;
-    }
-    
-    // Find all images in content
-    $content = preg_replace_callback(
-        '/<img[^>]+>/i',
-        function($matches) {
-            $img = $matches[0];
-            
-            // Extract attachment ID from class
-            if (preg_match('/wp-image-(\d+)/', $img, $id_match)) {
-                $attachment_id = $id_match[1];
-                $credit = altr_get_image_credit($attachment_id);
-                
-                // If no credit, hide image
-                if (!$credit) {
-                    return '<!-- Image hidden: missing photographer credit -->';
-                }
-                
-                // Wrap image with figure and caption
-                return '<figure class="wp-block-image">' . $img . 
-                       '<figcaption class="text-[11px] font-mono mt-2 text-right">' . $credit . '</figcaption></figure>';
-            }
-            
-            return $img;
-        },
-        $content
-    );
-    
-    return $content;
-}, 20);
-
-/**
  * Admin notice for missing credits
  */
 add_action('admin_notices', function() {
@@ -337,6 +301,7 @@ add_action('admin_notices', function() {
 
 /**
  * Filter ACF WYSIWYG content - hide images without credits
+ * This is the ONLY filter needed - it processes images when ACF loads the field
  */
 add_filter('acf/format_value/type=wysiwyg', function($value, $post_id, $field) {
     if (empty($value)) {
