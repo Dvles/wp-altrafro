@@ -66,6 +66,15 @@ function altr_enqueue_assets()
         $filter_menus_js_ver,
         true
     );
+    
+    // Blockquote share
+    wp_enqueue_script(
+        'altr-blockquote-share-js',
+        get_theme_file_uri('app/js/blockquote-share.js'),
+        [],
+        $blockquote_share_js_ver,
+        true
+    );
 
 
 

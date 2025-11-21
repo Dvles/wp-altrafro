@@ -280,6 +280,28 @@
       max-width: 100% !important;
   }
 
+  /* Blockquotes - FULL WIDTH (override indent) */
+  .article-body > blockquote,
+  .article-body > figure.wp-block-quote {
+      @apply py-16;
+      @apply text-2xl lg:text-3xl font-semibold leading-tight;
+      margin-left: 0 !important;
+      max-width: 100% !important;
+  }
+
+  .article-body > blockquote p {
+      @apply text-2xl lg:text-3xl font-semibold leading-tight mb-0;
+      margin-left: 0 !important;
+      max-width: 100% !important;
+  }
+
+  /* Share button for blockquotes - positioned below */
+  .blockquote-share {
+      @apply block mt-6 text-xs uppercase !font-mono tracking-wide text-right;
+      @apply px-3 py-2 !font-mono uppercase bg-hypergreen hover:bg-black hover:text-white transition-colors;
+      @apply cursor-pointer inline-block;
+  }
+
 }
 
 @layer base {
