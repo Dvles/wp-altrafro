@@ -220,18 +220,18 @@
 
   /* Intro */
   .is-style-intro {
-      @apply text-lg leading-relaxed font-light mb-24;
+      @apply text-lg leading-relaxed font-light mb-24 global-padding-sides;
   }
 
   /* Outro */
   .is-style-outro {
-      @apply text-lg leading-relaxed mt-24 mb-12;
+      @apply text-lg leading-relaxed mt-24 mb-12 global-padding-sides pb-32;
       @apply lg:ml-[25%] lg:max-w-[75%];
   }
 
   /* Article body - ALL direct children indented by default */
   .article-body > * {
-      @apply lg:ml-[25%] lg:max-w-[75%];
+      @apply lg:ml-[25%] lg:max-w-[75%] global-padding-sides;
   }
 
   /* Paragraphs */
@@ -249,7 +249,7 @@
   .article-body h2,
   .article-body h3,
   .article-body h4 {
-      @apply font-bold mb-4 mt-8;
+      @apply  mb-4 mt-8 !underline uppercase;
   }
 
   /* Images */
@@ -268,7 +268,6 @@
   /* Blockquotes - FULL WIDTH (override indent) */
   .article-body > blockquote,
   .article-body > figure.wp-block-quote {
-      @apply py-16;
       @apply text-2xl lg:text-3xl font-semibold leading-tight;
       margin-left: 0 !important;
       max-width: 100% !important;
@@ -283,7 +282,7 @@
   /* Blockquotes - FULL WIDTH (override indent) */
   .article-body > blockquote,
   .article-body > figure.wp-block-quote {
-      @apply py-16;
+     
       @apply text-2xl lg:text-3xl font-semibold leading-tight;
       margin-left: 0 !important;
       max-width: 100% !important;
