@@ -1,108 +1,54 @@
-/* editor.css - Enhanced visual cues for block editor */
-
-/* Base article content in editor */
-.editor-styles-wrapper .article-content p,
-.editor-styles-wrapper .wp-block-paragraph {
-  font-size: 1rem;
-  line-height: 1.625;
-  margin-bottom: 1.5rem;
+/* Base editor body */
+body.mce-content-body,
+body.mce-content-body p {
+  font-family: "Metrophobic", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0 0 1.25rem;
 }
 
-/* INTRO STYLE - Make it clearly visible in editor */
-.editor-styles-wrapper .is-style-intro {
-  font-size: 1.125rem;
-  line-height: 1.75;
-  font-weight: 300;
-  /* Visual indicator for editor */
-  background: rgba(0, 255, 136, 0.08); 
-  border-left: 3px solid #00ff88;
-  padding: 1rem 1rem 1rem 1.5rem;
-  margin-bottom: 3rem;
-  position: relative;
-}
-
-/* Label badge for intro */
-.editor-styles-wrapper .is-style-intro::before {
-  content: 'INTRO';
-  position: absolute;
-  top: -0.5rem;
-  left: 1rem;
-  font-size: 9px;
-  font-family: monospace;
+/* H1 / H2 used as section titles */
+body.mce-content-body h1 {
+  font-size: 28px;
   font-weight: 700;
-  letter-spacing: 0.1em;
-  background: #00ff88;
-  color: #000;
-  padding: 2px 6px;
-  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 2.5rem 0 1rem;
 }
 
-/* OUTRO STYLE */
-.editor-styles-wrapper .is-style-outro {
-  font-size: 1.125rem;
-  line-height: 1.75;
-  /* Visual indicator for editor */
-  background: rgba(0, 0, 0, 0.04);
-  border-left: 3px solid #000;
-  padding: 1rem 1rem 1rem 1.5rem;
-  margin-top: 3rem;
-  position: relative;
-}
-
-.editor-styles-wrapper .is-style-outro::before {
-  content: 'OUTRO';
-  position: absolute;
-  top: -0.5rem;
-  left: 1rem;
-  font-size: 9px;
-  font-family: monospace;
+body.mce-content-body h2 {
+  font-size: 22px;
   font-weight: 700;
-  letter-spacing: 0.1em;
-  background: #000;
-  color: #fff;
-  padding: 2px 6px;
-  border-radius: 2px;
-}
-
-/* DEFAULT STYLE - subtle indicator */
-.editor-styles-wrapper .wp-block-paragraph:not(.is-style-intro):not(.is-style-outro) {
-  border-left: 1px solid transparent;
-  padding-left: 0.5rem;
-  transition: border-color 0.2s;
-}
-
-.editor-styles-wrapper .wp-block-paragraph:not(.is-style-intro):not(.is-style-outro):hover {
-  border-left-color: rgba(0, 0, 0, 0.1);
-}
-
-/* TWEETABLE QUOTE */
-.editor-styles-wrapper .is-style-tweetable {
-  border-left: 4px solid #000;
-  padding-left: 1rem;
-  font-style: italic;
-  background: rgba(0, 0, 0, 0.02);
-  position: relative;
-}
-
-.editor-styles-wrapper .is-style-tweetable::after {
-  content: 'TWEETABLE';
-  position: absolute;
-  right: 0.5rem;
-  top: 0.5rem;
-  font-size: 9px;
-  font-family: monospace;
-  font-weight: 700;
+  text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: #000;
-  color: #fff;
-  padding: 2px 6px;
-  font-style: normal;
+  margin: 2rem 0 1rem;
 }
 
-/* IMAGE CAPTION RIGHT */
-.editor-styles-wrapper .is-style-caption-right figcaption {
-  text-align: right;
-  font-size: 0.75rem;
-  font-style: italic;
-  opacity: 0.7;
+/* Big editorial quote */
+body.mce-content-body blockquote {
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 600;
+  font-style: normal;
+  margin: 3rem 0;
+  padding: 0;
+  border: none;
+}
+
+/* Make quote paragraphs inherit the big style */
+body.mce-content-body blockquote p {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+}
+
+/* Optional: make <cite> small & grey if you ever use it */
+body.mce-content-body blockquote cite {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9ca3af;
 }

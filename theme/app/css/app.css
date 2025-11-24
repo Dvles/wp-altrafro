@@ -249,7 +249,7 @@
   .article-body h2,
   .article-body h3,
   .article-body h4 {
-      @apply  mb-4 mt-8 !underline uppercase;
+    @apply  mb-4 mt-8 !underline uppercase tracking-tight;
   }
 
   /* Images */

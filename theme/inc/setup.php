@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Theme setup and initialization
  *
@@ -28,11 +27,16 @@ function altr_setup()
     // Load text domain for translations
     load_theme_textdomain(ALTR_TEXT_DOMAIN, get_template_directory() . '/languages');
 
-    // Add theme support
+    // Core theme supports
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
+
+    // Editor styles (for block editor / classic editor where used)
     add_theme_support('editor-styles');
-    add_editor_style('dist/assets/app.css');
+    add_editor_style([
+        'dist/assets/app.css',    // base Tailwind-ish styles (optional)
+        'dist/assets/editor.css', // custom editor-only styles (headings, quotes, etc.)
+    ]);
 
     // HTML5 support
     add_theme_support('html5', [
@@ -43,7 +47,7 @@ function altr_setup()
         'caption',
     ]);
 
-    // Register navigation menus
+    // Navigation menus
     register_nav_menus([
         'primary' => __('Primary Menu', ALTR_TEXT_DOMAIN),
         'mobile'  => __('Mobile Menu', ALTR_TEXT_DOMAIN),
@@ -52,23 +56,13 @@ function altr_setup()
     // Image sizes
     add_image_size('altr-hero', 1920, 1080, true);
     add_image_size('altr-card', 600, 400, true);
-
-    // Enable custom styles inside the block editor
-    add_theme_support('editor-styles');
-
-    // Load a stylesheet just for the editor
-    add_editor_style( [
-        'dist/assets/app.css',
-        'dist/assets/editor.css',
-    ] );
 }
 add_action('after_setup_theme', 'altr_setup');
 
-
 /**
- * Disable Gutenberg for posts (using ACF instead)
+ * Disable Gutenberg for posts (we use ACF fields instead)
  */
-add_filter('use_block_editor_for_post_type', function($use, $post_type) {
+add_filter('use_block_editor_for_post_type', function ($use, $post_type) {
     if ($post_type === 'post') {
         return false;
     }
@@ -76,8 +70,21 @@ add_filter('use_block_editor_for_post_type', function($use, $post_type) {
 }, 10, 2);
 
 /**
- * Remove default editor from posts (content is in ACF fields)
+ * Remove default content editor from posts
  */
-add_action('init', function() {
+add_action('init', function () {
     remove_post_type_support('post', 'editor');
+});
+
+/**
+ * Force editor.css into ACF WYSIWYG (Classic TinyMCE inside ACF fields)
+ */
+add_action('acf/input/admin_head', function () {
+    $href = get_theme_file_uri('dist/assets/editor.css');
+
+    printf(
+        '<link rel="stylesheet" href="%s?ver=%s" />',
+        esc_url($href),
+        esc_attr(ALTR_VERSION)
+    );
 });
