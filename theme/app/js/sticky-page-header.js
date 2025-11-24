@@ -11,6 +11,10 @@ const applyFixedMetrics = () => {
   header.style.left  = `${headerRect.left}px`;
   header.style.width = `${headerRect.width}px`;  // Keep original width
   header.style.top   = `0`;
+
+  // Reserve space for the fixed header
+  emptySpace.style.height = `${headerRect.height}px`;
+
   
   // Empty space metrics - start 1px earlier to close gap
   const spaceRect = colSpace.getBoundingClientRect();
@@ -19,10 +23,12 @@ const applyFixedMetrics = () => {
   emptySpace.style.top   = `0`;
 };
 
-  const clearFixedMetrics = () => {
-    header.style.left = header.style.width = header.style.top = '';
-    emptySpace.style.left = emptySpace.style.width = emptySpace.style.top = '';
-  };
+const clearFixedMetrics = () => {
+  header.style.left = header.style.width = header.style.top = '';
+  emptySpace.style.left = emptySpace.style.width = emptySpace.style.top = '';
+  emptySpace.style.height = '';
+};
+
 
   const setFixed = (fixed) => {
     header.classList.toggle('is-fixed', fixed);

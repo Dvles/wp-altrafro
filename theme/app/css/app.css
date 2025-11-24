@@ -301,6 +301,16 @@
       @apply cursor-pointer inline-block;
   }
 
+  #empty-space {
+  width: 100%;
+  pointer-events: none;
+}
+
+#pageHeader.is-fixed {
+  position: fixed;
+  z-index: 50;
+}
+
 }
 
 @layer base {

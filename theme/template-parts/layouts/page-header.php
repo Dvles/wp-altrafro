@@ -29,6 +29,7 @@ if ($type === 'post') {
   <div class="relative col-start-3 col-end-11 lg:col-start-2 lg:col-end-10">
     <!-- Sentinel sits above the header to trigger fixing -->
     <div id="sticky-sentinel" class="h-px"></div>
+      <div id="empty-space"></div>
     
     <!-- Mobile: min-h-screen-63px with no vertical padding, Desktop: min-h-screen-95px with py-4 -->
     <div
