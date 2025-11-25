@@ -138,7 +138,7 @@ function altr_generate_fixtures($count = 10, $options = []) {
     // Get or create tags
     $tag_ids = [];
     if ($options['with_tags']) {
-        $tags = ['nigeria', 'mixedmedia', 'germany', 'brazil', 'feminism', 'lgbtq', 'heritage', 'rwanda', '3d', 'ai', 'spain', 'botswana','southafrica', 'kenya', 'print', 'award', 'forbes'];
+        $tags = ['nigeria', 'mixedmedia', 'germany', 'brazil', 'feminism', 'lgbtq', 'heritage', 'rwanda', '3d', 'ai', 'spain', 'botswana','southafrica', 'kenya', 'print', 'award', 'forbes', 'usa', 'tech', 'sustainability', 'ar', 'identity', 'moma'];
         foreach ($tags as $tag) {
             $term = term_exists($tag, 'post_tag');
             if (!$term) {
