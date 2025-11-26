@@ -311,6 +311,17 @@
   z-index: 50;
 }
 
+/* Sticky Article Sidebar */
+#article-sidebar.is-sidebar-sticky {
+  z-index: 40;
+  transition: none; /* Prevent flash during position changes */
+}
+
+/* Ensure sidebar content doesn't shift */
+#article-sidebar > aside {
+  width: 100%;
+}
+
 }
 
 @layer base {

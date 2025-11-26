@@ -48,7 +48,9 @@ get_template_part(
 <section class="page-grid mt-20">
     <!-- Sidebar -->
     <div class="hidden lg:block lg:col-start-2 lg:col-end-4">
-        <?php get_template_part('template-parts/components/article-sidebar'); ?>
+                <div id="article-sidebar">
+            <?php get_template_part('template-parts/components/article-sidebar'); ?>
+        </div>
     </div>
 
     <!-- Intro -->

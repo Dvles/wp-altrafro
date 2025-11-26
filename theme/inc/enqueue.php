@@ -76,6 +76,17 @@ function altr_enqueue_assets()
         true
     );
 
+// Sticky sidebar for single posts
+if (is_single()) {
+    wp_enqueue_script(
+        'sticky-sidebar',
+        get_template_directory_uri() . '/app/js/sticky-sidebar.js', // Added missing /
+        [],
+        filemtime(get_template_directory() . '/app/js/sticky-sidebar.js'), // Added missing / here too
+        true
+    );
+}
+
 
 
     // Localize script to pass ajaxurl to JavaScript
