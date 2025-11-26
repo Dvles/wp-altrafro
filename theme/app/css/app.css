@@ -322,6 +322,36 @@
   width: 100%;
 }
 
+/* Sticky page header - mobile post styling */
+#pageHeader.is-fixed[data-type="post"] {
+  @apply md:bg-white;
+  background-color: black !important;
+}
+
+@screen md {
+  #pageHeader.is-fixed[data-type="post"] {
+    background-color: white !important;
+  }
+}
+
+/* Post title - white on mobile when fixed */
+#pageHeader.is-fixed[data-type="post"] .post-title {
+  @apply text-xl md:text-[26px];
+  color: white !important;
+}
+
+@screen md {
+  #pageHeader.is-fixed[data-type="post"] .post-title {
+    color: black !important;
+    border-bottom: black 1 solid;
+  }
+}
+
+/* Hide subheading on mobile when fixed */
+#pageHeader.is-fixed[data-type="post"] .subheading-text {
+  @apply hidden md:block;
+}
+
 }
 
 @layer base {

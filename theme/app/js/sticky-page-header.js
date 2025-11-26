@@ -5,30 +5,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const col         = header.parentElement;
   const colSpace    = emptySpace.parentElement;
 
-const applyFixedMetrics = () => {
-  // Header metrics
-  const headerRect = col.getBoundingClientRect();
-  header.style.left  = `${headerRect.left}px`;
-  header.style.width = `${headerRect.width}px`;  // Keep original width
-  header.style.top   = `0`;
+  const applyFixedMetrics = () => {
+    // Header metrics
+    const headerRect = col.getBoundingClientRect();
+    header.style.left  = `${headerRect.left}px`;
+    header.style.width = `${headerRect.width}px`;
+    header.style.top   = `0`;
 
-  // Reserve space for the fixed header
-  emptySpace.style.height = `${headerRect.height}px`;
+    // Reserve space for the fixed header
+    emptySpace.style.height = `${headerRect.height}px`;
 
-  
-  // Empty space metrics - start 1px earlier to close gap
-  const spaceRect = colSpace.getBoundingClientRect();
-  emptySpace.style.left  = `${spaceRect.left - 1}px`;  // Move 1px left
-  emptySpace.style.width = `${spaceRect.width + 1}px`; // Extend 1px
-  emptySpace.style.top   = `0`;
-};
+    // Empty space metrics - start 1px earlier to close gap
+    const spaceRect = colSpace.getBoundingClientRect();
+    emptySpace.style.left  = `${spaceRect.left - 1}px`;
+    emptySpace.style.width = `${spaceRect.width + 1}px`;
+    emptySpace.style.top   = `0`;
+  };
 
-const clearFixedMetrics = () => {
-  header.style.left = header.style.width = header.style.top = '';
-  emptySpace.style.left = emptySpace.style.width = emptySpace.style.top = '';
-  emptySpace.style.height = '';
-};
-
+  const clearFixedMetrics = () => {
+    header.style.left = header.style.width = header.style.top = '';
+    emptySpace.style.left = emptySpace.style.width = emptySpace.style.top = '';
+    emptySpace.style.height = '';
+  };
 
   const setFixed = (fixed) => {
     header.classList.toggle('is-fixed', fixed);

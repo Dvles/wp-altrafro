@@ -32,21 +32,21 @@ if ($type === 'post') {
       <div id="empty-space"></div>
     
     <!-- Mobile: min-h-screen-63px with no vertical padding, Desktop: min-h-screen-95px with py-4 -->
-    <div
-      id="pageHeader"
-      class="bg-white min-h-screen-63px px-4 py-0 lg:min-h-screen-95px
-             z-40 transition-all duration-300 lg:py-4
-             flex flex-col justify-center lg:justify-start"
-    >
-      <h2 class="<?php echo esc_attr($typeclasses); ?>">
-        <?php echo esc_html($heading); ?>
-      </h2>
-
-      <?php if ($subheading) : ?>
-        <p class="text-sm uppercase tracking-wide mt-1">
-          <?php echo esc_html($subheading); ?>
-        </p>
-      <?php endif; ?>
+<div
+  id="pageHeader"
+  data-type="<?php echo esc_attr($type); ?>"
+  class="bg-white min-h-screen-63px px-4 py-0 lg:min-h-screen-95px
+         z-40 transition-all duration-300 lg:py-4
+         flex flex-col justify-center lg:justify-start"
+>
+  <h2 class="<?php echo esc_attr($typeclasses); ?> transition-all duration-300">
+    <?php echo esc_html($heading); ?>
+  </h2>
+  <?php if ($subheading) : ?>
+    <p class="text-sm uppercase tracking-wide mt-1 subheading-text transition-all duration-300">
+      <?php echo esc_html($subheading); ?>
+    </p>
+  <?php endif; ?>
 
       <?php if ($show_filters) : ?>
         <?php
