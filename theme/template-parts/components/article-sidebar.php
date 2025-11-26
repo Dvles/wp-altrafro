@@ -31,7 +31,7 @@ $title = urlencode(get_the_title($post_id));
   <div class="flex flex-col gap-4">
 
     <!-- SOCIAL -->
-    <div class="flex flex-row gap-3">
+    <div class="flex flex-row flex-wrap gap-3">
       <a href="https://twitter.com/intent/tweet?url=<?php echo $url; ?>&text=<?php echo $title; ?>"
         target="_blank" rel="noopener noreferrer"
         class="hover:bg-hypergreen">

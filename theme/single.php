@@ -54,7 +54,7 @@ get_template_part(
     </div>
 
     <!-- Intro -->
-    <div class="col-start-2 col-end-12 lg:col-start-4 lg:col-end-10">
+    <div class="col-start-3 col-end-11 lg:col-start-4 lg:col-end-10">
         <?php if ($introText) : ?>
             <p class="is-style-intro">
                 <?php echo esc_html($introText); ?>
@@ -66,7 +66,7 @@ get_template_part(
 <!-- SECTION 2: MAIN CONTENT + ADS -->
 <section class="page-grid">
     <!-- Main Content - full width cols 2-10 -->
-    <div class="col-start-2 col-end-12 lg:col-start-2 lg:col-end-10 article-content">
+    <div class="col-start-3 col-end-11 lg:col-start-2 lg:col-end-10 article-content">
         <?php if ($mainContent) : ?>
             <div class="article-body">
                 <?php echo apply_filters('the_content', $mainContent); ?>
